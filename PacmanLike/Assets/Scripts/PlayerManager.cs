@@ -15,6 +15,7 @@ public class PlayerManager : MonoBehaviour
     private Direction ReserveDirection;
     private SpriteRenderer sr;
     private Vector3[] AroundVector = new Vector3[4];
+    private Animator animator;
     
     //SerializeField : 変数の扱いをprivate扱いにしながらインスペクタに入力欄を表示することができる
     [SerializeField] private float speed = 1.0f;
@@ -36,6 +37,8 @@ public class PlayerManager : MonoBehaviour
         AroundVector[1] = new Vector3(0, 1, 0); //上
         AroundVector[2] = new Vector3(-1, 0, 0); //左
         AroundVector[3] = new Vector3(0, -1, 0); // 下
+
+        animator = gameObject.GetComponent<Animator>();
         
         DecideNextPosition();
     }
@@ -225,15 +228,19 @@ public class PlayerManager : MonoBehaviour
         {
             case Direction.Right:
                 pos += AroundVector[0];
+                animator.Play("Right");
                 break;
             case Direction.Up:
                 pos += AroundVector[1];
+                animator.Play("Up");
                 break;
             case Direction.Left:
                 pos += AroundVector[2];
+                animator.Play("Left");
                 break;
             case Direction.Down:
                 pos += AroundVector[3];
+                animator.Play("Down");
                 break;
 
         }
