@@ -282,4 +282,13 @@ public class PlayerManager : MonoBehaviour
         print("左のブロックフラグは" + blockflag[2] + "です");
         print("下のブロックフラグは" + blockflag[3] + "です");
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            Debug.Log("ゲームオーバー");
+        }
+    }
+
 }
