@@ -11,7 +11,7 @@ public class FishMoveInNoon : MonoBehaviour
 
     enum Direction
     {
-        Null, Right, Up, Left, Down
+        Null=-1, Right=0, Up=1, Left=2, Down=3
     }
 
     private Direction direction;
@@ -27,10 +27,10 @@ public class FishMoveInNoon : MonoBehaviour
         stageTilemap = grid.transform.Find("Stage").GetComponent<Tilemap>();
         direction = Direction.Left;
         sr = this.transform.Find("Sprites/Noon").GetComponent<SpriteRenderer>();
-        AroundVector[0] = new Vector3(1, 0, 0);
-        AroundVector[1] = new Vector3(0, 1, 0);
-        AroundVector[2] = new Vector3(-1, 0, 0);
-        AroundVector[3] = new Vector3(0, -1, 0);
+        AroundVector[(int)Direction.Right] = new Vector3(1, 0, 0);
+        AroundVector[(int)Direction.Up] = new Vector3(0, 1, 0);
+        AroundVector[(int)Direction.Left] = new Vector3(-1, 0, 0);
+        AroundVector[(int)Direction.Down] = new Vector3(0, -1, 0);
 
         Vector3 myPos = this.transform.position;
         Vector3 worldPos = grid.WorldToCell(myPos);
@@ -59,54 +59,67 @@ public class FishMoveInNoon : MonoBehaviour
 
     void FishMove()
     {
-        if(direction == Direction.Right)
+        Vector3 pos = transform.position;
+        switch (direction)
         {
-            Vector3 pos = transform.position;
-            pos.x += speed * Time.deltaTime;
-            this.transform.position = pos;
-            if (this.transform.position.x >= nextPosition.x)
-            {
-                pos.x = nextPosition.x;
+
+            case Direction.Right:
+                
+                pos.x += speed * Time.deltaTime;
                 this.transform.position = pos;
-                DecideNextPosition();
-            }
-        }
-        else if (direction == Direction.Up)
-        {
-            Vector3 pos = transform.position;
-            pos.y += speed * Time.deltaTime;
-            this.transform.position = pos;
-            if (this.transform.position.y >= nextPosition.y)
-            {
-                pos.y = nextPosition.y;
+                if (this.transform.position.x >= nextPosition.x)
+                {
+                    pos.x = nextPosition.x;
+                    this.transform.position = pos;
+                    DecideNextPosition();
+                }
+                break;
+
+            case Direction.Up:
+                
+                pos.y += speed * Time.deltaTime;
                 this.transform.position = pos;
-                DecideNextPosition();
-            }
-        }
-        else if (direction == Direction.Left)
-        {
-            Vector3 pos = transform.position;
-            pos.x -= speed * Time.deltaTime;
-            this.transform.position = pos;
-            if (this.transform.position.x <= nextPosition.x)
-            {
-                pos.x = nextPosition.x;
+                if (this.transform.position.y >= nextPosition.y)
+                {
+                    pos.y = nextPosition.y;
+                    this.transform.position = pos;
+                    DecideNextPosition();
+                }
+                break;
+
+            case Direction.Left:
+                
+                pos.x -= speed * Time.deltaTime;
                 this.transform.position = pos;
-                DecideNextPosition();
-            }
-        }
-        else if (direction == Direction.Down)
-        {
-            Vector3 pos = transform.position;
-            pos.y -= speed * Time.deltaTime;
-            this.transform.position = pos;
-            if (this.transform.position.y <= nextPosition.y)
-            {
-                pos.y = nextPosition.y;
+                if (this.transform.position.x <= nextPosition.x)
+                {
+                    pos.x = nextPosition.x;
+                    this.transform.position = pos;
+                    DecideNextPosition();
+                }
+                break;
+
+            case Direction.Down:
+                
+                pos.y -= speed * Time.deltaTime;
                 this.transform.position = pos;
+                if (this.transform.position.y <= nextPosition.y)
+                {
+                    pos.y = nextPosition.y;
+                    this.transform.position = pos;
+                    DecideNextPosition();
+                }
+                break;
+
+            case Direction.Null:
                 DecideNextPosition();
-            }
+                break;
+
+            default:
+                break;
+
         }
+
     }
 
     //移動方向を決める
@@ -130,33 +143,43 @@ public class FishMoveInNoon : MonoBehaviour
             direction = canMoveDir[rand];
         }
 
-        if (direction == Direction.Right)
+        Vector3 pos = new Vector3();
+        switch (direction)
         {
-            sr.flipX = true;
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            Vector3 pos = transform.position + AroundVector[0];
-            nextPosition = pos;
-        }
-        else if (direction == Direction.Up)
-        {
-            sr.flipX = false;
-            transform.rotation = Quaternion.Euler(0, 0, -90);
-            Vector3 pos = transform.position + AroundVector[1];
-            nextPosition = pos;
-        }
-        else if (direction == Direction.Left)
-        {
-            sr.flipX = false;
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            Vector3 pos = transform.position + AroundVector[2];
-            nextPosition = pos;
-        }
-        else if (direction == Direction.Down)
-        {
-            sr.flipX = false;
-            transform.rotation = Quaternion.Euler(0, 0, 90);
-            Vector3 pos = transform.position + AroundVector[3];
-            nextPosition = pos;
+            case Direction.Right:
+                sr.flipX = true;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+                pos = transform.position + AroundVector[(int)Direction.Right];
+                nextPosition = pos;
+                break;
+
+            case Direction.Up:
+                sr.flipX = false;
+                transform.rotation = Quaternion.Euler(0, 0, -90);
+                pos = transform.position + AroundVector[(int)Direction.Up];
+                nextPosition = pos;
+                break;
+
+            case Direction.Left:
+                sr.flipX = false;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+                pos = transform.position + AroundVector[(int)Direction.Left];
+                nextPosition = pos;
+                break;
+
+            case Direction.Down:
+                sr.flipX = false;
+                transform.rotation = Quaternion.Euler(0, 0, 90);
+                pos = transform.position + AroundVector[(int)Direction.Down];
+                nextPosition = pos;
+                break;
+
+            case Direction.Null:
+                break;
+
+            default:
+                break;
+
         }
 
     }
@@ -191,10 +214,10 @@ public class FishMoveInNoon : MonoBehaviour
     {
         bool[] blockflag = CheckAroundBlockToMove();
 
-        print("右のブロックフラグは" + blockflag[0] + "です");
-        print("上のブロックフラグは" + blockflag[1] + "です");
-        print("左のブロックフラグは" + blockflag[2] + "です");
-        print("下のブロックフラグは" + blockflag[3] + "です");
+        print("右のブロックフラグは" + blockflag[(int)Direction.Right] + "です");
+        print("上のブロックフラグは" + blockflag[(int)Direction.Up] + "です");
+        print("左のブロックフラグは" + blockflag[(int)Direction.Left] + "です");
+        print("下のブロックフラグは" + blockflag[(int)Direction.Down] + "です");
     }
 
 }
