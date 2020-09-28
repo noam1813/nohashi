@@ -19,8 +19,27 @@ public class FishMoveInNoon : MonoBehaviour
     //右上左下のタイルマップの位置(補正)
     private Vector3[] AroundVector = new Vector3[4];
 
-    public float speed = 1.0f;
+    [SerializeField] float speed;
+    //魚の通常速度
+    public float normalSpeed = 0.8f;
+    //魚の逃げる速度
+    public float runAwaySpeed = 1.3f;
+
+    //魚の座標
+    public Vector3 nowPosition;
     public Vector3 nextPosition;
+
+    //魚の可視距離
+    public float visibleDistance = 3.0f;
+
+    //魚が逃走状態か
+    bool isRunAwayState;
+    //魚の逃走状態が継続する時間
+    public float runAwayTime = 5.0f;
+    //タイマー
+    public float runAwayTimer = 0.0f;
+    //プレイヤーを発見した方向
+    [SerializeField] Direction discoveredPlayerDirection = Direction.Null;
 
     void Start()
     {
@@ -34,12 +53,17 @@ public class FishMoveInNoon : MonoBehaviour
 
         Vector3 myPos = this.transform.position;
         Vector3 worldPos = grid.WorldToCell(myPos);
-        Debug.Log("初期myPos:" + myPos.ToString("F3"));
-        Debug.Log("worldPos:" + worldPos.ToString("F3"));
+        nowPosition = worldPos;
+        //Debug.Log("初期myPos:" + myPos.ToString("F3"));
+        //Debug.Log("worldPos:" + worldPos.ToString("F3"));
+        //グリッド補正が入るかも
         myPos.x = worldPos.x;
         myPos.y = worldPos.y;
         this.transform.position = myPos;
-        Debug.Log("訂正後myPos:" + myPos.ToString("F3"));
+
+        speed = normalSpeed;
+        isRunAwayState = false;
+        //Debug.Log("訂正後myPos:" + myPos.ToString("F3"));
 
         DecideNextPosition();
         
@@ -47,18 +71,23 @@ public class FishMoveInNoon : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Debug.Log("実際のポジションは" + this.transform.position + "です");
-        //Debug.Log("グリッドされたポジションは" + grid.WorldToCell(this.transform.position) + "です");
-        //var position = new Vector3Int(-6, 4, 0);
-        //print(stageTilemap.GetTile(position));
-
         FishMove();
+        RunAwayFromPlayer();
     }
-
-    
 
     void FishMove()
     {
+        if(isRunAwayState == true && runAwayTimer < runAwayTime)
+        {
+            runAwayTimer += Time.deltaTime;
+        }
+        else if(isRunAwayState == true && runAwayTimer >= runAwayTime)
+        {
+            runAwayTimer = 0.0f;
+            isRunAwayState = false;
+            speed = normalSpeed;
+        }
+
         Vector3 pos = transform.position;
         switch (direction)
         {
@@ -70,6 +99,7 @@ public class FishMoveInNoon : MonoBehaviour
                 if (this.transform.position.x >= nextPosition.x)
                 {
                     pos.x = nextPosition.x;
+                    nowPosition = nextPosition;
                     this.transform.position = pos;
                     DecideNextPosition();
                 }
@@ -82,6 +112,7 @@ public class FishMoveInNoon : MonoBehaviour
                 if (this.transform.position.y >= nextPosition.y)
                 {
                     pos.y = nextPosition.y;
+                    nowPosition = nextPosition;
                     this.transform.position = pos;
                     DecideNextPosition();
                 }
@@ -94,6 +125,7 @@ public class FishMoveInNoon : MonoBehaviour
                 if (this.transform.position.x <= nextPosition.x)
                 {
                     pos.x = nextPosition.x;
+                    nowPosition = nextPosition;
                     this.transform.position = pos;
                     DecideNextPosition();
                 }
@@ -106,6 +138,7 @@ public class FishMoveInNoon : MonoBehaviour
                 if (this.transform.position.y <= nextPosition.y)
                 {
                     pos.y = nextPosition.y;
+                    nowPosition = nextPosition;
                     this.transform.position = pos;
                     DecideNextPosition();
                 }
@@ -206,6 +239,84 @@ public class FishMoveInNoon : MonoBehaviour
         }
         
         return AroundBlock;
+    }
+
+    //プレイヤーを見つける関数
+    bool DiscoverPlayer()
+    {
+        Vector2 rayDirection;
+        switch(direction)
+        {
+            case Direction.Right:
+                rayDirection = Vector2.right;
+                break;
+
+            case Direction.Up:
+                rayDirection = Vector2.up;
+                break;
+
+            case Direction.Left:
+                rayDirection = Vector2.left;
+                break;
+
+            case Direction.Down:
+                rayDirection = Vector2.down;
+                break;
+
+            default:
+                rayDirection = Vector2.zero;
+                break;
+        }
+
+        Ray2D ray = new Ray2D(transform.position, rayDirection);
+        Debug.DrawRay(ray.origin + rayDirection, (Vector3)ray.direction * visibleDistance, Color.green, 0.1f, false);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + (Vector3)rayDirection, rayDirection, visibleDistance);
+
+        if(hit.collider != null)
+        {
+            if (hit.collider.gameObject.tag == "Player")
+            {
+                Debug.Log("プレイヤー発見！");
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
+    //プレイヤーを発見したら逃げる
+    void RunAwayFromPlayer()
+    {
+        if(DiscoverPlayer())
+        {
+            isRunAwayState = true;
+            runAwayTimer = 0.0f;
+            nextPosition = nowPosition;
+            speed = runAwaySpeed;
+
+            switch(direction)
+            {
+                case Direction.Right:
+                    direction = Direction.Left;
+                    break;
+
+                case Direction.Up:
+                    direction = Direction.Down;
+                    break;
+
+                case Direction.Left:
+                    direction = Direction.Right;
+                    break;
+
+                case Direction.Down:
+                    direction = Direction.Up;
+                    break;
+
+                default:
+                    direction = Direction.Null;
+                    break;
+            }
+        }
     }
 
 
