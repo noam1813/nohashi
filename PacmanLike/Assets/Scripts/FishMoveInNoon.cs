@@ -32,6 +32,15 @@ public class FishMoveInNoon : MonoBehaviour
         AroundVector[2] = new Vector3(-1, 0, 0);
         AroundVector[3] = new Vector3(0, -1, 0);
 
+        Vector3 myPos = this.transform.position;
+        Vector3 worldPos = grid.WorldToCell(myPos);
+        Debug.Log("初期myPos:" + myPos.ToString("F3"));
+        Debug.Log("worldPos:" + worldPos.ToString("F3"));
+        myPos.x = worldPos.x;
+        myPos.y = worldPos.y;
+        this.transform.position = myPos;
+        Debug.Log("訂正後myPos:" + myPos.ToString("F3"));
+
         DecideNextPosition();
         
     }
@@ -103,7 +112,7 @@ public class FishMoveInNoon : MonoBehaviour
     //移動方向を決める
     void DecideNextPosition()
     {
-        bool[] blockflag = CheckAroundBlockForMovingDirection();
+        bool[] blockflag = CheckAroundBlockToMove();
         List<Direction> canMoveDir = new List<Direction>();
 
         if (!blockflag[0] && direction != Direction.Left)
@@ -153,7 +162,7 @@ public class FishMoveInNoon : MonoBehaviour
     }
 
     //周囲が移動可能か調べる
-    bool[] CheckAroundBlockForMovingDirection()
+    bool[] CheckAroundBlockToMove()
     {
         Vector3 nowPosition = grid.WorldToCell(this.transform.position);
 
@@ -162,7 +171,8 @@ public class FishMoveInNoon : MonoBehaviour
 
         foreach(var v in AroundVector.Select((value, index) => new { value, index }))
         {
-            if (stageTilemap.GetTile(grid.WorldToCell(this.transform.position + v.value)) != null)
+            Vector3Int pos = grid.WorldToCell(this.transform.position + v.value);
+            if (stageTilemap.GetTile(pos) != null)
             {
                 AroundBlock[v.index] = true;
             }
@@ -179,7 +189,7 @@ public class FishMoveInNoon : MonoBehaviour
     //周囲のブロックをお知らせ(デバッグ用)
     void AroundInfo()
     {
-        bool[] blockflag = CheckAroundBlockForMovingDirection();
+        bool[] blockflag = CheckAroundBlockToMove();
 
         print("右のブロックフラグは" + blockflag[0] + "です");
         print("上のブロックフラグは" + blockflag[1] + "です");
