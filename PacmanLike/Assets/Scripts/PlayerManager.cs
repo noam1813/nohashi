@@ -117,20 +117,19 @@ public class PlayerManager : MonoBehaviour
     private void GetReserveDirection()
     {
         
-        if (Input.GetAxis("Horizontal") > 0)
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             ReserveDirection = Direction.Right;
-            Debug.Log("OK");
         }
-        else if (Input.GetAxis("Vertical") > 0)
+        else if (Input.GetKey(KeyCode.UpArrow))
         {
             ReserveDirection = Direction.Up;
         }
-        else if (Input.GetAxis("Horizontal") < 0)
+        else if (Input.GetKey(KeyCode.LeftArrow))
         {
             ReserveDirection = Direction.Left;
         }
-        else if (Input.GetAxis("Vertical") < 0)
+        else if (Input.GetKey(KeyCode.DownArrow))
         {
             ReserveDirection = Direction.Down;
         }
