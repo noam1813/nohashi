@@ -9,10 +9,18 @@ public class FishMoveInNoon : MonoBehaviour
     public Grid grid;
     public Tilemap stageTilemap;
 
+    private FishSpritesManager FS;
+
+    //昼かどうか
+    public bool isNoon = true;
+
     enum Direction
     {
         Null=-1, Right=0, Up=1, Left=2, Down=3
     }
+
+    //プレイヤー
+    public GameObject player;
 
     private Direction direction;
     private SpriteRenderer sr;
@@ -24,6 +32,8 @@ public class FishMoveInNoon : MonoBehaviour
     public float normalSpeed = 0.8f;
     //魚の逃げる速度
     public float runAwaySpeed = 1.3f;
+    //魚の発見時の追跡速度
+    public float ChaseSpeed = 1.0f;
 
     //魚の座標
     public Vector3 nowPosition;
@@ -36,16 +46,35 @@ public class FishMoveInNoon : MonoBehaviour
     bool isRunAwayState;
     //魚の逃走状態が継続する時間
     public float runAwayTime = 5.0f;
-    //タイマー
+    //逃走タイマー
     public float runAwayTimer = 0.0f;
-    //プレイヤーを発見した方向
-    [SerializeField] Direction discoveredPlayerDirection = Direction.Null;
+
+    //プレイヤーを感知しているかどうか
+    bool isSensing;
+    //プレイヤーを発見しているかどうか
+    bool isDiscovering;
+    //魚の発見状態が継続する時間
+    public float chaseTime = 3.0f;
+    //追跡タイマー
+    public float chaseTimer = 0.0f;
+    //プレイヤーの座標
+    Vector3 playerPosition;
 
     void Start()
     {
         stageTilemap = grid.transform.Find("Stage").GetComponent<Tilemap>();
         direction = Direction.Left;
-        sr = this.transform.Find("Sprites/Noon").GetComponent<SpriteRenderer>();
+        FS = this.transform.Find("Sprites").GetComponent<FishSpritesManager>();
+        //if(isNoon)
+        //{
+        //    FS.SetSpriteToNoon();
+        //}
+        //else
+        //{
+        //    FS.SetSpriteToNight();
+        //}
+
+        sr = this.transform.Find("Sprites").GetComponent<SpriteRenderer>();
         AroundVector[(int)Direction.Right] = new Vector3(1, 0, 0);
         AroundVector[(int)Direction.Up] = new Vector3(0, 1, 0);
         AroundVector[(int)Direction.Left] = new Vector3(-1, 0, 0);
@@ -69,10 +98,24 @@ public class FishMoveInNoon : MonoBehaviour
         
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+            ChangeTime();
+    }
+
     void FixedUpdate()
     {
-        FishMove();
-        RunAwayFromPlayer();
+        if(isNoon)
+        {
+            FishMove();
+            RunAwayFromPlayer();
+        }
+        else
+        {
+
+        }
+        
     }
 
     void FishMove()
@@ -242,7 +285,7 @@ public class FishMoveInNoon : MonoBehaviour
     }
 
     //プレイヤーを見つける関数
-    bool DiscoverPlayer()
+    bool DiscoverPlayer(float dist)
     {
         Vector2 rayDirection;
         switch(direction)
@@ -269,8 +312,8 @@ public class FishMoveInNoon : MonoBehaviour
         }
 
         Ray2D ray = new Ray2D(transform.position, rayDirection);
-        Debug.DrawRay(ray.origin + rayDirection, (Vector3)ray.direction * visibleDistance, Color.green, 0.1f, false);
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + (Vector3)rayDirection, rayDirection, visibleDistance);
+        Debug.DrawRay(ray.origin + rayDirection, (Vector3)ray.direction * dist, Color.green, 0.1f, false);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + (Vector3)rayDirection, rayDirection, dist);
 
         if(hit.collider != null)
         {
@@ -287,7 +330,7 @@ public class FishMoveInNoon : MonoBehaviour
     //プレイヤーを発見したら逃げる
     void RunAwayFromPlayer()
     {
-        if(DiscoverPlayer())
+        if(DiscoverPlayer(visibleDistance))
         {
             isRunAwayState = true;
             runAwayTimer = 0.0f;
@@ -319,7 +362,6 @@ public class FishMoveInNoon : MonoBehaviour
         }
     }
 
-
     //周囲のブロックをお知らせ(デバッグ用)
     void AroundInfo()
     {
@@ -329,6 +371,25 @@ public class FishMoveInNoon : MonoBehaviour
         print("上のブロックフラグは" + blockflag[(int)Direction.Up] + "です");
         print("左のブロックフラグは" + blockflag[(int)Direction.Left] + "です");
         print("下のブロックフラグは" + blockflag[(int)Direction.Down] + "です");
+    }
+
+    //発見状態の追跡
+
+    //時間変更(デバッグ用)
+    void ChangeTime()
+    {
+       
+        if(isNoon)
+        {
+            isNoon = false;
+            FS.SetSpriteToNight();
+        }
+        else
+        {
+            isNoon = true;
+            FS.SetSpriteToNoon();
+        }
+        
     }
 
 }
