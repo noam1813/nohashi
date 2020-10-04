@@ -65,19 +65,21 @@ MonoBehaviour:
   stageTilemap: {fileID: 0}
   isNoon: 1
   playerObject: {fileID: 0}
-  speed: 0
-  normalSpeed: 0.8
-  runAwaySpeed: 1.3
-  chaseSpeed: 1
+  speed: 3
+  normalSpeed: 3
+  runAwaySpeed: 7
+  chaseSpeed: 5.2
   nowPosition: {x: 0, y: 0, z: 0}
   nextPosition: {x: 0, y: 0, z: 0}
   visibleDistanceInNoon: 3
-  visibleDistanceInNight: 3
-  sensibleDistanceInNight: 5
+  visibleDistanceInNight: 4
+  sensibleDistanceInNight: 16
   runAwayTime: 5
   runAwayTimer: 0
-  chaseTime: 3
+  chaseTime: 4
   chaseTimer: 0
+  chasingCoolTime: 3
+  chasingCoolTimer: 0
 --- !u!1 &9071935460638317586
 GameObject:
   m_ObjectHideFlags: 0

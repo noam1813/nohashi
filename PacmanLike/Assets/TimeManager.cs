@@ -38,11 +38,13 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private float maxTime;
 
     [SerializeField] private Image TimeZoneIcon;
+    
+    [SerializeField] private Image TimeZoneProgressCircle;
 
     [SerializeField] private Text nowDayText;
-    
-    
-    
+
+
+
 
     void Start()
     {
@@ -62,13 +64,15 @@ public class TimeManager : MonoBehaviour
     void UpdateTime()
     {
         nowTime += Time.deltaTime;
-        
+
         //現在時刻が最大時刻以上→昼と夜を入れ替える
         if (nowTime >= maxTime)
         {
             ChangeTimeZone();
         }
         
+        TimeZoneProgressCircle.fillAmount = nowTime / maxTime;
+
     }
 
     
@@ -83,6 +87,7 @@ public class TimeManager : MonoBehaviour
             case TimeZoneData.Noon:
                 timeZone = TimeZoneData.Night;
                 TimeZoneIcon.sprite = Resources.Load<Sprite>("TimeZoneIcon/Night");
+                StageEffectManager.instance.SetShadow(true);
                 break;
             
             case TimeZoneData.Night:
@@ -91,6 +96,7 @@ public class TimeManager : MonoBehaviour
                 timeZone = TimeZoneData.Noon;
                 TimeZoneIcon.sprite = Resources.Load<Sprite>("TimeZoneIcon/Noon");
                 nowDayText.text = nowDay + "Day";
+                StageEffectManager.instance.SetShadow(false);
                 break;
             
             default:
@@ -98,6 +104,7 @@ public class TimeManager : MonoBehaviour
                 break;
         }
 
+        FishManager.instance.Spawn(3);
         FishManager.instance.ChangeFishMode(timeZone);
     }
 }

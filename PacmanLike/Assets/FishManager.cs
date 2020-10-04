@@ -7,7 +7,14 @@ public class FishManager : MonoBehaviour
 {
     public static FishManager instance;
     [SerializeField] private List<FishMove> Fishes;
+
+    [SerializeField] private List<Vector2> spawnPoints;
+
+    [SerializeField] private GameObject FishPrefab;
     
+    [SerializeField] private Grid grid;
+
+    [SerializeField] private GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,5 +45,23 @@ public class FishManager : MonoBehaviour
                     break;
             }
         }
+    }
+
+
+    public void Spawn(int amount)
+    {
+        for (var i = 0; i < amount; i++)
+        {
+            Vector2 point = SpawnManager.instance.Spawn();
+
+            var obj = Instantiate(FishPrefab);
+            obj.transform.position = point;
+            FishMove script = obj.GetComponent<FishMove>();
+            script.grid = grid;
+            script.playerObject = player;
+            Fishes.Add(script);
+        }
+        
+        SpawnManager.instance.ResetSpawn();
     }
 }

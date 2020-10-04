@@ -107,6 +107,7 @@ public class FishMove : MonoBehaviour
 
         isSensing = false;
         isChasing = false;
+        
         sensibleDistanceInNight = Mathf.Pow(sensibleDistanceInNight, 2);
 
     }
