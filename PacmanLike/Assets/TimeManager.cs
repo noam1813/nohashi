@@ -96,7 +96,8 @@ public class TimeManager : MonoBehaviour
             default:
                 Debug.LogError("時刻が正しく設定されていません");
                 break;
-            
         }
+
+        FishManager.instance.ChangeFishMode(timeZone);
     }
 }
