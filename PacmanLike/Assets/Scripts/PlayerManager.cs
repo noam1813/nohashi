@@ -11,12 +11,13 @@ public class PlayerManager : MonoBehaviour
     public Grid grid;
     public Tilemap stageTilemap;
 
-    private Direction nowDirection;
+    [SerializeField] private Direction nowDirection;
     private Direction ReserveDirection;
+    private Direction nowAnimatingDirection;
     private SpriteRenderer sr;
     private Vector3[] AroundVector = new Vector3[4];
     private Animator animator;
-    
+
     //SerializeField : 変数の扱いをprivate扱いにしながらインスペクタに入力欄を表示することができる
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private Vector3 nextPosition;
@@ -53,6 +54,7 @@ public class PlayerManager : MonoBehaviour
     private void FixedUpdate()
     {
         PlayerMove();
+        SetAnimation();
     }
 
 
@@ -156,7 +158,7 @@ public class PlayerManager : MonoBehaviour
         {
             DecideNextPositionFromReserve();
         }
-       
+
     }
 
 
@@ -178,6 +180,10 @@ public class PlayerManager : MonoBehaviour
         else if (!blockflag[3] && nowDirection == Direction.Down)
         {
             SetDirection(Direction.Down);
+        }
+        else
+        {
+            SetDirection(Direction.Null);
         }
     }
 
@@ -227,19 +233,15 @@ public class PlayerManager : MonoBehaviour
         {
             case Direction.Right:
                 pos += AroundVector[0];
-                animator.Play("Right");
                 break;
             case Direction.Up:
                 pos += AroundVector[1];
-                animator.Play("Up");
                 break;
             case Direction.Left:
                 pos += AroundVector[2];
-                animator.Play("Left");
                 break;
             case Direction.Down:
                 pos += AroundVector[3];
-                animator.Play("Down");
                 break;
 
         }
@@ -288,6 +290,59 @@ public class PlayerManager : MonoBehaviour
         {
             Debug.Log("ゲームオーバー");
         }
+    }
+
+
+    public void SetAnimation()
+    {
+        String animName = "";
+        if (nowDirection != Direction.Null && nowDirection != nowAnimatingDirection)
+        {
+            nowAnimatingDirection = nowDirection;
+        }
+
+        if (nowDirection == Direction.Null)
+        {
+            switch (nowAnimatingDirection)
+            {
+                case Direction.Right:
+                    animName = "RightIdle";
+                    break;
+                case Direction.Up:
+                    animName = "UpIdle";
+                    break;
+                case Direction.Left:
+                    animName = "LeftIdle";
+                    break;
+                case Direction.Down:
+                    animName = "DownIdle";
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            switch (nowAnimatingDirection)
+            {
+                case Direction.Right:
+                    animName = "Right";
+                    break;
+                case Direction.Up:
+                    animName = "Up";
+                    break;
+                case Direction.Left:
+                    animName = "Left";
+                    break;
+                case Direction.Down:
+                    animName = "Down";
+                    break;
+                default:
+                    break;
+            }
+        }
+
+            animator.Play(animName);
     }
 
 }
