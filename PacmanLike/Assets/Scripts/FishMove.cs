@@ -686,4 +686,16 @@ public class FishMove : MonoBehaviour
 
 }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.tag == "Player" && isNoon)
+        {
+            if(!DiscoverPlayer(visibleDistanceInNoon))
+            {
+                Debug.Log("食べられちゃった!!");
+                Destroy(this.gameObject);
+            }
+        }
+    }
+
 }
