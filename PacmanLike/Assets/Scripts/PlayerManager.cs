@@ -17,6 +17,11 @@ public class PlayerManager : MonoBehaviour
     private SpriteRenderer sr;
     private Vector3[] AroundVector = new Vector3[4];
     private Animator animator;
+    
+    // 水草関係
+    public bool isHide;
+    private Mizukusa useMizukusa;
+    
 
     //SerializeField : 変数の扱いをprivate扱いにしながらインスペクタに入力欄を表示することができる
     [SerializeField] private float speed = 1.0f;
@@ -48,12 +53,21 @@ public class PlayerManager : MonoBehaviour
     private void Update()
     {
         GetReserveDirection();
+        //秘匿有効時、Shiftキーが入力されているかチェックする
+        if (isHide)
+        {
+            ManageHideMode();
+        }
     }
     
     
     private void FixedUpdate()
     {
-        PlayerMove();
+        //秘匿時はプレイヤーは動けない
+        if (!isHide)
+        {
+            PlayerMove();   
+        }
         SetAnimation();
     }
 
@@ -113,6 +127,15 @@ public class PlayerManager : MonoBehaviour
             
         }
         this.transform.position = pos;
+    }
+
+    private void ManageHideMode()
+    {
+        if(!Input.GetKey(KeyCode.LeftShift) && !Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            useMizukusa.endUse();
+            Debug.Log("終わり");
+        }
     }
 
 
@@ -286,13 +309,36 @@ public class PlayerManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Enemy")
+        switch (other.gameObject.tag)
         {
-            Debug.Log("ゲームオーバー");
+            case "Enemy":
+                Debug.Log("ゲームオーバー");
+                break;
         }
     }
 
+    
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        switch (other.gameObject.tag)
+        {
+            //Shiftキーの入力&秘匿設定がされてない際実行
+            case "Mizukusa":
+                if (Input.GetKey(KeyCode.LeftShift) && !isHide)
+                {
+                    Debug.Log("はじまり");
+                    other.gameObject.GetComponent<Mizukusa>().StartUse();
+                }
 
+                break;
+        }
+        
+    }
+
+
+    /// <summary>
+    /// 移動方向に合わせてアニメーションを設定
+    /// </summary>
     public void SetAnimation()
     {
         String animName = "";
@@ -343,6 +389,31 @@ public class PlayerManager : MonoBehaviour
         }
 
             animator.Play(animName);
+    }
+
+    
+    /// <summary>
+    /// 水草を用いたプレイヤーの秘匿設定
+    /// 有効、無効、使用している水草の設定
+    /// </summary>
+    /// <param name="mode"></param>
+    /// <param name="mizukusa"></param>
+    public void SetHide(bool mode,Mizukusa mizukusa = null)
+    {
+        isHide = mode;
+        if (mode)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,0.5f);
+            useMizukusa = mizukusa;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
+            useMizukusa = null;
+        }
+        
+        //秘匿時、暗くなるエフェクトをかける
+        StageEffectManager.instance.SetShadow(mode);
     }
 
 }

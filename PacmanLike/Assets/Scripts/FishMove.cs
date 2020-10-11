@@ -415,6 +415,12 @@ public class FishMove : MonoBehaviour
     //プレイヤーを見つける関数
     bool DiscoverPlayer(float dist)
     {
+        //水草に隠れている場合、のはしを感知できない
+        if (playerObject.GetComponent<PlayerManager>().isHide)
+        {
+            return false;
+        }
+        
         Vector2 rayDirection;
         switch (direction)
         {

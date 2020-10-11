@@ -287,6 +287,12 @@ public class FishMoveInNoon : MonoBehaviour
     //プレイヤーを見つける関数
     bool DiscoverPlayer(float dist)
     {
+        //水草に隠れている場合、のはしを感知できない
+        if (player.GetComponent<PlayerManager>().isHide)
+        {
+            return false;
+        }
+        
         Vector2 rayDirection;
         switch(direction)
         {

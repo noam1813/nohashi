@@ -87,7 +87,6 @@ public class TimeManager : MonoBehaviour
             case TimeZoneData.Noon:
                 timeZone = TimeZoneData.Night;
                 TimeZoneIcon.sprite = Resources.Load<Sprite>("TimeZoneIcon/Night");
-                StageEffectManager.instance.SetShadow(true);
                 break;
             
             case TimeZoneData.Night:
@@ -96,7 +95,6 @@ public class TimeManager : MonoBehaviour
                 timeZone = TimeZoneData.Noon;
                 TimeZoneIcon.sprite = Resources.Load<Sprite>("TimeZoneIcon/Noon");
                 nowDayText.text = nowDay + "Day";
-                StageEffectManager.instance.SetShadow(false);
                 break;
             
             default:
