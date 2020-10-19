@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 1659835f6a5d91c4c96e861d55d921a6
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Liberal Hand
+  fontNames:
+  - Liberal Hand
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: d2e87e2a6605be747b75a14007cbca58, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
