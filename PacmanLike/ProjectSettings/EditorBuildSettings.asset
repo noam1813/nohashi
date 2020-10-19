@@ -4,5 +4,20 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/TitleScene.unity
+    guid: 8cd28ab879c2c8440bea6f53ae08f997
+  - enabled: 1
+    path: Assets/Scenes/MainGameScene.unity
+    guid: d600aae3104cea04492bd4098c67f91b
+  - enabled: 1
+    path: Assets/Scenes/StageSelectScene.unity
+    guid: 0447ac31b5bd09243a07f0222d734f81
+  - enabled: 1
+    path: Assets/Scenes/EnemySampleScene.unity
+    guid: f832a77533a45584db02db49d97b3b2e
+  - enabled: 1
+    path: Assets/Scenes/ManagerScene.unity
+    guid: 6eb03b411d2a4ca4da2ac87a21278688
   m_configObjects: {}
