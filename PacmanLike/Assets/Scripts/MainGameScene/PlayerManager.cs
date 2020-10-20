@@ -293,6 +293,18 @@ public class PlayerManager : MonoBehaviour
         {
             Debug.Log("ゲームオーバー");
         }
+
+        if (other.gameObject.tag == "Kai")
+        {
+            nowKai += 1;
+            Debug.Log("ゲット");
+            Destroy(other.gameObject);
+            
+            if (nowKai >= KaiManager.instance.MaxKai)
+            {
+                Debug.Log("貝全部ゲット");
+            }
+        }
     }
 
 

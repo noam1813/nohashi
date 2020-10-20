@@ -5,16 +5,18 @@ using UnityEngine;
 
 public class KaiManager : MonoBehaviour
 {
+    public static KaiManager instance;
+    
     public int MaxKai;
-
     public List<Vector2> SpawnPoint;
-
     public GameObject KaiPrefab;
-
     public List<bool> IsSpawned;
+    
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
+        
         ResetSpawn();
         
         for (int i = 1; i <= MaxKai; i++)
@@ -23,6 +25,7 @@ public class KaiManager : MonoBehaviour
             var Obj = Instantiate(KaiPrefab);
             Obj.transform.position = Pos;
         }
+        
     }
 
     public Vector2 SendSpawnPoint()
