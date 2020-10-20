@@ -7,8 +7,6 @@ public class KaiManager : MonoBehaviour
 {
     public int MaxKai;
 
-    public int NowKai;
-    
     public List<Vector2> SpawnPoint;
 
     public GameObject KaiPrefab;

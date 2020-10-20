@@ -10,13 +10,16 @@ public class PlayerManager : MonoBehaviour
 {
     public Grid grid;
     public Tilemap stageTilemap;
-
+    public int nowKai;
+    
     [SerializeField] private Direction nowDirection;
     private Direction ReserveDirection;
     private Direction nowAnimatingDirection;
     private SpriteRenderer sr;
     private Vector3[] AroundVector = new Vector3[4];
     private Animator animator;
+    
+    
 
     //SerializeField : 変数の扱いをprivate扱いにしながらインスペクタに入力欄を表示することができる
     [SerializeField] private float speed = 1.0f;
