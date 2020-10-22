@@ -299,7 +299,19 @@ public class PlayerManager : MonoBehaviour
             nowKai += 1;
             Debug.Log("ゲット");
             Destroy(other.gameObject);
-            
+            if (nowKai == 1)
+            {
+                KaiManager.instance.kai1.color = new Color(255, 255, 255, 255);
+            }
+            else if (nowKai == 2)
+            {
+                KaiManager.instance.kai2.color = new Color(255, 255, 255, 255);
+            }
+            else if (nowKai == 3)
+            {
+                KaiManager.instance.kai3.color = new Color(255, 255, 255, 255); 
+            }
+
             if (nowKai >= KaiManager.instance.MaxKai)
             {
                 Debug.Log("貝全部ゲット");

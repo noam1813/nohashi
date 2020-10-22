@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class KaiManager : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class KaiManager : MonoBehaviour
     public List<Vector2> SpawnPoint;
     public GameObject KaiPrefab;
     public List<bool> IsSpawned;
+
+    public Image kai1;
+    public Image kai2;
+    public Image kai3;
     
     // Start is called before the first frame update
     void Start()
