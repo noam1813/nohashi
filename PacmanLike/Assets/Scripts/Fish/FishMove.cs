@@ -693,6 +693,7 @@ public class FishMove : MonoBehaviour
             if(!DiscoverPlayer(visibleDistanceInNoon))
             {
                 Debug.Log("食べられちゃった!!");
+                FishManager.instance.RemoveFish(this);
                 Destroy(this.gameObject);
             }
         }

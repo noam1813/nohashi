@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.PlayerLoop;
+using UniRx;
 
 
 [Serializable]
@@ -37,6 +38,9 @@ public class TimeManager : MonoBehaviour
     //現在の時刻
     [SerializeField] private float nowTime;
     
+    //合計経過時間
+    private int totalTime;
+    
     //最大時刻
     [SerializeField] private float maxTime;
 
@@ -45,6 +49,8 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private Image TimeZoneProgressCircle;
 
     [SerializeField] private Text nowDayText;
+
+    private IDisposable countTimeObservable;
 
 
 
@@ -56,6 +62,11 @@ public class TimeManager : MonoBehaviour
 
         //見つけてくる
         musicManager = GameObject.Find("MusicManager").GetComponent<MainGameMusicManager>();
+
+        countTimeObservable = Observable.Interval(TimeSpan.FromSeconds(1)).Subscribe(_ =>
+        {
+            totalTime++;
+        }).AddTo(this);
     }
 
     private void FixedUpdate()
@@ -114,5 +125,11 @@ public class TimeManager : MonoBehaviour
 
         FishManager.instance.Spawn(3);
         FishManager.instance.ChangeFishMode(timeZone);
+    }
+
+
+    public int GetTotalTime()
+    {
+        return totalTime;
     }
 }
