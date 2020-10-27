@@ -10,13 +10,16 @@ public class PlayerManager : MonoBehaviour
 {
     public Grid grid;
     public Tilemap stageTilemap;
-
+    public int nowKai;
+    
     [SerializeField] private Direction nowDirection;
     private Direction ReserveDirection;
     private Direction nowAnimatingDirection;
     private SpriteRenderer sr;
     private Vector3[] AroundVector = new Vector3[4];
     private Animator animator;
+    
+    
 
     //SerializeField : 変数の扱いをprivate扱いにしながらインスペクタに入力欄を表示することができる
     [SerializeField] private float speed = 1.0f;
@@ -289,6 +292,30 @@ public class PlayerManager : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             Debug.Log("ゲームオーバー");
+        }
+
+        if (other.gameObject.tag == "Kai")
+        {
+            nowKai += 1;
+            Debug.Log("ゲット");
+            Destroy(other.gameObject);
+            if (nowKai == 1)
+            {
+                KaiManager.instance.kai1.color = new Color(255, 255, 255, 255);
+            }
+            else if (nowKai == 2)
+            {
+                KaiManager.instance.kai2.color = new Color(255, 255, 255, 255);
+            }
+            else if (nowKai == 3)
+            {
+                KaiManager.instance.kai3.color = new Color(255, 255, 255, 255); 
+            }
+
+            if (nowKai >= KaiManager.instance.MaxKai)
+            {
+                Debug.Log("貝全部ゲット");
+            }
         }
     }
 

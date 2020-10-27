@@ -24,6 +24,9 @@ public class TimeManager : MonoBehaviour
     // Ex→TimeManager.instance.timeZone
     // TimeManager.instance.ChangeTimeZone()
     public static TimeManager instance;
+
+    //これで音楽を変えれるよ
+    private MainGameMusicManager musicManager;
     
     //現在の日付。１日目など
     [SerializeField] private int nowDay = 1;
@@ -50,6 +53,9 @@ public class TimeManager : MonoBehaviour
     {
         // instanceは俺だ
         instance = this;
+
+        //見つけてくる
+        musicManager = GameObject.Find("MusicManager").GetComponent<MainGameMusicManager>();
     }
 
     private void FixedUpdate()
@@ -88,6 +94,7 @@ public class TimeManager : MonoBehaviour
                 timeZone = TimeZoneData.Night;
                 TimeZoneIcon.sprite = Resources.Load<Sprite>("TimeZoneIcon/Night");
                 StageEffectManager.instance.SetShadow(true);
+                musicManager.StartCoroutine("ToNight");
                 break;
             
             case TimeZoneData.Night:
@@ -97,6 +104,7 @@ public class TimeManager : MonoBehaviour
                 TimeZoneIcon.sprite = Resources.Load<Sprite>("TimeZoneIcon/Noon");
                 nowDayText.text = nowDay + "Day";
                 StageEffectManager.instance.SetShadow(false);
+                musicManager.StartCoroutine("ToNoon");
                 break;
             
             default:
