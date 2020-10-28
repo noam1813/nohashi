@@ -13,7 +13,6 @@ public class TitleSceneManager : MonoBehaviour
     public GameObject buttonSummary;
     public GameObject checkStart;
     public GameObject checkExit;
-
     public GameObject pressEnter;
     Button button;
     // Start is called before the first frame update
@@ -48,7 +47,7 @@ public class TitleSceneManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);//選択の解除
         buttonSummary.SetActive(false);
         checkStart.SetActive(true);
-        button = GameObject.Find("Canvas/CheckStartPanel/CheckStartButtonY").GetComponent<Button>();
+        button = GameObject.Find("Canvas/CheckStartPanel/CheckStartButtonN").GetComponent<Button>();
         //ボタンが選択された状態になる
         button.Select();
     }
@@ -105,13 +104,19 @@ public class TitleSceneManager : MonoBehaviour
     }
     private IEnumerator Appearance()
    {
-        for (int i = 20; i > 0; i--) {
-            float p = i * 1.5f / 60;
-            Vector3 nowPos = GameObject.Find("Canvas/ButtonSummary").transform.position;
-            if(i == 20){
-                GameObject.Find("Canvas/ButtonSummary").transform.position = new Vector3 (-10f, nowPos.y, nowPos.z);
+        for (int i = 40; i > 0; i--) {
+            float p = i * 50f / 60;
+            RectTransform rt = buttonSummary.GetComponent<RectTransform>();
+            //Vector3 nowPos = buttonSummary.GetComponent<RectTransform>().position;
+            //Vector3 nowPos = GameObject.Find("Canvas/ButtonSummary").transform.position;
+            if(i == 40){
+                rt.localPosition = new Vector3 (-1300f, 160f, rt.localPosition.z);
+                //nowPos.x = -1000f;
+            //   GameObject.Find("Canvas/ButtonSummary").transform.position = new Vector3 (-10f, nowPos.y, nowPos.z);
             }else{
-                GameObject.Find("Canvas/ButtonSummary").transform.position = new Vector3 (nowPos.x + p, nowPos.y, nowPos.z);
+                rt.localPosition = new Vector3 (rt.localPosition.x + p, rt.localPosition.y, rt.localPosition.z);
+                //nowPos.x += p;
+            //  GameObject.Find("Canvas/ButtonSummary").transform.position = new Vector3 (nowPos.x + p, nowPos.y, nowPos.z);
             }
             yield return null;
          }
