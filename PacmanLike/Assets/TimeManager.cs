@@ -31,10 +31,11 @@ public class TimeManager : MonoBehaviour
     
     //現在の日付。１日目など
     [SerializeField] private int nowDay = 1;
-    
+
     //昼か夜かを示す
-    [SerializeField] private TimeZoneData timeZone;
-    
+    //[SerializeField] private TimeZoneData timeZone;
+    [SerializeField] public TimeZoneData timeZone { get; private set; }
+
     //現在の時刻
     [SerializeField] private float nowTime;
     
