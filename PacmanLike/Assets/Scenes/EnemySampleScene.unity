@@ -2931,48 +2931,19 @@ PrefabInstance:
       objectReference: {fileID: 57693392}
     - target: {fileID: 630460416709587339, guid: ad82412f08eb575458c4f64cc18a04e7,
         type: 3}
-      propertyPath: speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 630460416709587339, guid: ad82412f08eb575458c4f64cc18a04e7,
-        type: 3}
-      propertyPath: normalSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 630460416709587339, guid: ad82412f08eb575458c4f64cc18a04e7,
-        type: 3}
-      propertyPath: runAwaySpeed
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 630460416709587339, guid: ad82412f08eb575458c4f64cc18a04e7,
-        type: 3}
-      propertyPath: chaseSpeed
-      value: 5.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 630460416709587339, guid: ad82412f08eb575458c4f64cc18a04e7,
-        type: 3}
       propertyPath: playerObject
       value: 
       objectReference: {fileID: 1111602664}
-    - target: {fileID: 630460416709587339, guid: ad82412f08eb575458c4f64cc18a04e7,
+    - target: {fileID: 9071935459855561332, guid: ad82412f08eb575458c4f64cc18a04e7,
         type: 3}
-      propertyPath: sensibleDistanceInNight
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 630460416709587339, guid: ad82412f08eb575458c4f64cc18a04e7,
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 8966945178157639174, guid: c6d62cc49ae89d64e9bbb6e167891de3,
         type: 3}
-      propertyPath: chasingCoolTime
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 630460416709587339, guid: ad82412f08eb575458c4f64cc18a04e7,
+    - target: {fileID: 9071935459855561332, guid: ad82412f08eb575458c4f64cc18a04e7,
         type: 3}
-      propertyPath: chaseTime
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 630460416709587339, guid: ad82412f08eb575458c4f64cc18a04e7,
-        type: 3}
-      propertyPath: visibleDistanceInNight
-      value: 4
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9071935460166455310, guid: ad82412f08eb575458c4f64cc18a04e7,
         type: 3}
@@ -3034,10 +3005,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9071935460166455539, guid: ad82412f08eb575458c4f64cc18a04e7,
-        type: 3}
-      propertyPath: grid
-      value: 
-      objectReference: {fileID: 57693392}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad82412f08eb575458c4f64cc18a04e7, type: 3}
