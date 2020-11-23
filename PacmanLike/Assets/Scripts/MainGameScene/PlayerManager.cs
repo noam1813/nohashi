@@ -264,11 +264,11 @@ public class PlayerManager : MonoBehaviour
         {
             if (stageTilemap.GetTile(grid.WorldToCell(this.transform.position + v.value)) != null)
             {
-                AroundBlock[v.index] = true;
+                AroundBlock[v.index] = false;
             }
             else
             {
-                AroundBlock[v.index] = false;
+                AroundBlock[v.index] = true;
             }
         }
         
