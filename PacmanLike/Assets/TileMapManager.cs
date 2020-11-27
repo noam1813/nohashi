@@ -1,0 +1,69 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Tilemaps;
+
+public class TileMapManager : MonoBehaviour
+{
+    public static TileMapManager instance;
+    
+    [SerializeField] private Tilemap myTileMap;
+    [SerializeField] private Tilemap parentTileMap;
+
+    [SerializeField] private TileBase wallTileBase;
+    [SerializeField] private TileBase roadTileBase;
+    [SerializeField] private TileBase throughedTileBase;
+
+    private TilemapCollider2D parentTileMapCollider;
+
+    private Vector2 parentTileMapSize;
+
+    private bool[,] throughedMap;
+    // Start is called before the first frame update
+    void Start()
+    {
+        instance = this;
+        parentTileMapCollider = parentTileMap.GetComponent<TilemapCollider2D>();
+        parentTileMapSize = parentTileMapCollider.bounds.size;
+        throughedMap = new bool[(int) parentTileMapSize.x,(int) parentTileMapSize.y];
+        Debug.Log(parentTileMapSize);
+        for (var i = 0; i < parentTileMapSize.y; i++)
+        {
+            for (var j = 0; j < parentTileMapSize.x; j++)
+            {
+                Vector3Int pos = new Vector3Int(j,i,0);
+                pos-=new Vector3Int((int) (parentTileMapSize.x/2),(int) (parentTileMapSize.y/2),0);
+                Debug.Log(pos);
+                var data = parentTileMap.GetTile(pos);
+                if (data != null)
+                {
+                    Debug.Log(data.name);
+                    myTileMap.SetTile(pos,wallTileBase);
+                }
+                else
+                {
+                    Debug.Log("null");
+                    myTileMap.SetTile(pos,roadTileBase);
+                }
+                
+            }
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void SetThroughedMap(Vector3 pos)
+    {
+        Vector3Int converedPos = myTileMap.GetComponent<GridLayout>().WorldToCell(pos);
+        Debug.Log(converedPos);
+        if (!throughedMap[(int) (converedPos.x+parentTileMapSize.x/2), (int) (converedPos.y+parentTileMapSize.y/2)])
+        {
+            throughedMap[(int) (converedPos.x+parentTileMapSize.x/2), (int) (converedPos.y+parentTileMapSize.y/2)] = true;
+            myTileMap.SetTile(converedPos, throughedTileBase);
+        }
+    }
+}
