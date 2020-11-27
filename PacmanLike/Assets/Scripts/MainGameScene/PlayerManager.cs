@@ -231,6 +231,7 @@ public class PlayerManager : MonoBehaviour
     {
         nowDirection = direc;
         Vector3 pos = transform.position;
+        TileMapManager.instance.SetThroughedMap(pos);
 
         switch (direc)
         {
