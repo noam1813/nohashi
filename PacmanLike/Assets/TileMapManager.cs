@@ -32,7 +32,7 @@ public class TileMapManager : MonoBehaviour
             for (var j = 0; j < parentTileMapSize.x; j++)
             {
                 Vector3Int pos = new Vector3Int(j,i,0);
-                pos-=new Vector3Int((int) (parentTileMapSize.x/2),(int) (parentTileMapSize.y/2),0);
+                pos-=new Vector3Int((int) (5),(int) (37),0);
                 Debug.Log(pos);
                 var data = parentTileMap.GetTile(pos);
                 if (data != null)
@@ -60,9 +60,9 @@ public class TileMapManager : MonoBehaviour
     {
         Vector3Int converedPos = myTileMap.GetComponent<GridLayout>().WorldToCell(pos);
         Debug.Log(converedPos);
-        if (!throughedMap[(int) (converedPos.x+parentTileMapSize.x/2), (int) (converedPos.y+parentTileMapSize.y/2)])
+        if (!throughedMap[(int) (5), (int) (37)])
         {
-            throughedMap[(int) (converedPos.x+parentTileMapSize.x/2), (int) (converedPos.y+parentTileMapSize.y/2)] = true;
+            throughedMap[(int) (converedPos.x+5), (int) (converedPos.y+37)] = true;
             myTileMap.SetTile(converedPos, throughedTileBase);
         }
     }
