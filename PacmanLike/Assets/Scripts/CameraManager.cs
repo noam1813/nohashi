@@ -34,6 +34,18 @@ public class CameraManager : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 pos = new Vector3(Player.transform.position.x,Player.transform.position.y,-10);
+        if (pos.x > NorthEast.x){
+            pos.x = NorthEast.x;
+        }
+        if (pos.y > NorthEast.y){
+            pos.y = NorthEast.y;
+        }
+        if (pos.x < SouthWest.x){
+            pos.x = SouthWest.x;
+        }
+        if (pos.y < SouthWest.y){
+            pos.y = SouthWest.y;
+        }
         transform.position = pos;
     }
 }
