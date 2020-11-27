@@ -9,7 +9,7 @@ public class FishMove : MonoBehaviour
     public Grid grid;
     public Tilemap stageTilemap;
 
-    private FishSpritesManager FS;
+    //private FishSpritesManager FS;
 
     //昼かどうか
     public bool isNoon = true;
@@ -24,6 +24,9 @@ public class FishMove : MonoBehaviour
 
     private Direction direction;
     private SpriteRenderer sr;
+    
+    //アニメーター
+    private Animator animator;
     //右上左下のタイルマップの位置(補正)
     private Vector3[] AroundVector = new Vector3[4];
 
@@ -73,7 +76,9 @@ public class FishMove : MonoBehaviour
     {
         stageTilemap = grid.transform.Find("Stage").GetComponent<Tilemap>();
         direction = Direction.Left;
-        FS = this.transform.Find("Sprites").GetComponent<FishSpritesManager>();
+        //FS = this.transform.Find("Sprites").GetComponent<FishSpritesManager>();
+        animator = GetComponent<Animator>();
+        SetAnimation();
         //if(isNoon)
         //{
         //    FS.SetSpriteToNoon();
@@ -345,6 +350,7 @@ public class FishMove : MonoBehaviour
         {
             int rand = Random.Range(0, canMoveDir.Count);
             direction = canMoveDir[rand];
+            SetAnimation();
         }
 
         Vector3 pos = new Vector3();
@@ -438,6 +444,8 @@ public class FishMove : MonoBehaviour
                 rayDirection = Vector2.zero;
                 break;
         }
+        
+        SetAnimation();
 
         Ray2D ray = new Ray2D(transform.position, rayDirection);
         Debug.DrawRay(ray.origin + rayDirection, (Vector3)ray.direction * dist, Color.green, 0.1f, false);
@@ -487,6 +495,8 @@ public class FishMove : MonoBehaviour
                     direction = Direction.Null;
                     break;
             }
+            
+            SetAnimation();
         }
     }
 
@@ -579,6 +589,7 @@ public class FishMove : MonoBehaviour
                 if (flag && j == 3)
                 {
                     direction = (Direction)i;
+                    SetAnimation();
                     break;
                 }
                     
@@ -652,13 +663,15 @@ public class FishMove : MonoBehaviour
         {
             InitializeFishState();
             isNoon = false;
-            FS.SetSpriteToNight();
+            SetAnimation();
+            //FS.SetSpriteToNight();
         }
         else
         {
             InitializeFishState();
             isNoon = true;
-            FS.SetSpriteToNoon();
+            SetAnimation();
+            //FS.SetSpriteToNoon();
         }
 
     }
@@ -697,6 +710,55 @@ public class FishMove : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+    }
+    
+    
+    public void SetAnimation()
+    {
+        string animName = "";
+        if (isNoon)
+        {
+            switch (direction)
+            {
+                case Direction.Right:
+                    animName = "RightNoon";
+                    break;
+                case Direction.Up:
+                    animName = "UpNoon";
+                    break;
+                case Direction.Left:
+                    animName = "LeftNoon";
+                    break;
+                case Direction.Down:
+                    animName = "DownNoon";
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            switch (direction)
+            {
+                case Direction.Right:
+                    animName = "RightNight";
+                    break;
+                case Direction.Up:
+                    animName = "UpNight";
+                    break;
+                case Direction.Left:
+                    animName = "LeftNight";
+                    break;
+                case Direction.Down:
+                    animName = "DownNight";
+                    break;
+                default:
+                    break;
+            }
+        }
+            
+
+        animator.Play(animName);
     }
 
 }
