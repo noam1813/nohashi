@@ -657,15 +657,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints:
-  - {x: -10, y: 3}
-  - {x: -10, y: -4}
-  - {x: -6, y: 0}
-  - {x: 0, y: 1}
-  - {x: 3, y: 1}
-  - {x: 0, y: -2}
-  - {x: 3, y: -2}
-  - {x: 9, y: 3}
-  - {x: 9, y: -4}
+  - {x: -5, y: -2}
+  - {x: 8, y: -8}
+  - {x: 21, y: -5}
+  - {x: 34, y: -4}
+  - {x: 31, y: -16}
+  - {x: 17, y: -24}
+  - {x: 33, y: -34}
+  - {x: 13, y: -30}
+  - {x: 13, y: -36}
 --- !u!1001 &579395821
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -967,15 +967,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxKai: 3
   SpawnPoint:
-  - {x: -10, y: 3}
-  - {x: -10, y: -4}
-  - {x: -6, y: 0}
-  - {x: 0, y: 1}
-  - {x: 3, y: 1}
-  - {x: 0, y: -2}
-  - {x: 3, y: -2}
-  - {x: 9, y: 3}
-  - {x: 9, y: -4}
+  - {x: -5, y: -2}
+  - {x: 8, y: -8}
+  - {x: 21, y: -5}
+  - {x: 34, y: -4}
+  - {x: 31, y: -16}
+  - {x: 17, y: -24}
+  - {x: 33, y: -34}
+  - {x: 13, y: -30}
+  - {x: 13, y: -36}
   KaiPrefab: {fileID: 4097977071705865221, guid: d5192f17d03b748ad9ff00dc06805acf,
     type: 3}
   IsSpawned: 
