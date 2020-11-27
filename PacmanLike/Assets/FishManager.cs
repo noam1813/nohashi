@@ -15,10 +15,19 @@ public class FishManager : MonoBehaviour
     [SerializeField] private Grid grid;
 
     [SerializeField] private GameObject player;
+
+    [SerializeField] private int defeatedFishes;
     // Start is called before the first frame update
     void Start()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if(instance != this)
+        {
+            DestroyImmediate(gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -63,5 +72,16 @@ public class FishManager : MonoBehaviour
         }
         
         SpawnManager.instance.ResetSpawn();
+    }
+
+    public void RemoveFish(FishMove target)
+    {
+        defeatedFishes++;
+        Fishes.Remove(target);
+    }
+
+    public int GetDefeatedFishes()
+    {
+        return defeatedFishes;
     }
 }
