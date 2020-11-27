@@ -71,6 +71,9 @@ public class FishMove : MonoBehaviour
     public float chasingCoolTime = 3.0f;
     //追跡クールタイマー
     public float chasingCoolTimer = 0.0f;
+    
+    //アニメーション速度
+    private float animationSpeed = 1f;
 
     void Start()
     {
@@ -407,11 +410,11 @@ public class FishMove : MonoBehaviour
             Vector3Int pos = grid.WorldToCell(this.transform.position + v.value);
             if (stageTilemap.GetTile(pos) != null)
             {
-                AroundBlock[v.index] = true;
+                AroundBlock[v.index] = false;
             }
             else
             {
-                AroundBlock[v.index] = false;
+                AroundBlock[v.index] = true;
             }
         }
 
