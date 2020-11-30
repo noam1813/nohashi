@@ -19,8 +19,8 @@ public class PlayerManager : MonoBehaviour
     private SpriteRenderer sr;
     private Vector3[] AroundVector = new Vector3[4];
     private Animator animator;
-    
-    
+
+    private bool isSceneEnded;
 
     //SerializeField : 変数の扱いをprivate扱いにしながらインスペクタに入力欄を表示することができる
     [SerializeField] private float speed = 1.0f;
@@ -36,6 +36,8 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
+        isSceneEnded = false;
+
         stageTilemap = grid.transform.Find("Stage").GetComponent<Tilemap>();
         ReserveDirection = Direction.Left;
         AroundVector[0] = new Vector3(1, 0, 0); //右
@@ -291,9 +293,16 @@ public class PlayerManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Enemy" && TimeManager.instance.timeZone == TimeZoneData.Night)
+        if (other.gameObject.tag == "Enemy" && TimeManager.instance.timeZone == TimeZoneData.Night && !isSceneEnded)
         {
-            Debug.Log("ゲームオーバー");
+            isSceneEnded = true;
+
+            SceneFadeManager.Instance.StartFade(SceneFadeManager.FADE_TYPE.FADE_OUTIN, 0.4f, () =>
+            {
+                SceneManager.LoadScene("GameOverScene");
+            });
+
+            //Debug.Log("ゲームオーバー");
 
         }
 
