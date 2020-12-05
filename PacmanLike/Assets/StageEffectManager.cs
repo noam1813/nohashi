@@ -10,6 +10,11 @@ public class StageEffectManager : MonoBehaviour
     
     [SerializeField] private Image NightShadow;
 
+    [SerializeField] private RectTransform MizukusaGroup;
+
+    [SerializeField] private Vector3 MizukusaShowPos;
+    [SerializeField] private Vector3 MizukusaHidePos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,5 +73,24 @@ public class StageEffectManager : MonoBehaviour
             
             ExitShadowSequence.Play();
         }
+    }
+
+    public void SetMizukusa(bool mode)
+    {
+        if (mode)
+        {
+            MizukusaGroup.DOLocalMove(
+                MizukusaShowPos,
+                1f
+            );
+        }
+        else
+        {
+            MizukusaGroup.DOLocalMove(
+                MizukusaHidePos,
+                1f
+            );
+        }
+        
     }
 }

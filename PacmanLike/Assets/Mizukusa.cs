@@ -43,6 +43,7 @@ public class Mizukusa : MonoBehaviour
 
         isUsing = true;
         player.SetHide(true,this);
+        StageEffectManager.instance.SetMizukusa(true);
     }
 
     /// <summary>
@@ -64,6 +65,7 @@ public class Mizukusa : MonoBehaviour
     public void endUse()
     {
         player.SetHide(false);
+        StageEffectManager.instance.SetMizukusa(false);
         Destroy(gameObject);
     }
 }
