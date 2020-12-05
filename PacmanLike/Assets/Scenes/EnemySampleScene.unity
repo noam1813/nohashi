@@ -406,17 +406,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c4906eadbdadff24aa20b40f89fd810f, type: 2}
   - {fileID: 11400000, guid: 46a8c358a4cd5044284739e05c86242d, type: 2}
   newMiniMaps:
-  - {fileID: 11400000, guid: 61982857025f0bc45929a31990e0d64a, type: 2}
-  - {fileID: 11400000, guid: 4008544974f87b444a3527a491affafe, type: 2}
-  - {fileID: 11400000, guid: 75ef6c83e5d1ac84eaf8b3213b4f149c, type: 2}
-  - {fileID: 11400000, guid: aaac99f443930e94ca0431d9fdf21bf2, type: 2}
-  - {fileID: 11400000, guid: dd93def7350d904489e3ccc83ff267c3, type: 2}
-  - {fileID: 11400000, guid: f8f51384a05017e42b25dfc0a10208d7, type: 2}
-  - {fileID: 11400000, guid: f18cf1f9f664eda478fd42c22b94a3e3, type: 2}
-  - {fileID: 11400000, guid: bfc7e0c3dc2b6de49bac3fd1337178f7, type: 2}
-  - {fileID: 11400000, guid: 03b2e967a5ff3774786cdf7990469d9a, type: 2}
-  - {fileID: 11400000, guid: c4906eadbdadff24aa20b40f89fd810f, type: 2}
-  - {fileID: 11400000, guid: 46a8c358a4cd5044284739e05c86242d, type: 2}
+  - {fileID: 11400000, guid: 5b90292184fdf6d419c2a13b8b5011b5, type: 2}
+  - {fileID: 11400000, guid: d8a72b233cac7bf46be385272de59c9e, type: 2}
+  - {fileID: 11400000, guid: 57613114cbe8e7a42bb70b360c273716, type: 2}
+  - {fileID: 11400000, guid: dfacd36e5304a8141800a15b30166c26, type: 2}
+  - {fileID: 11400000, guid: 294341950aefff04e96f67cccc26c400, type: 2}
+  - {fileID: 11400000, guid: d2035b58b441d4649aca05cb1c6c97fc, type: 2}
+  - {fileID: 11400000, guid: fd2685cdd8376ca4a8a40ad636a40ab1, type: 2}
+  - {fileID: 11400000, guid: 09e2f4dd5923bdf41ab594828be6ad87, type: 2}
+  - {fileID: 11400000, guid: de254c753cc2f9f4c8e348701a0e31a3, type: 2}
+  - {fileID: 11400000, guid: 3b85892a6e4a5894cae0f122603bdba1, type: 2}
+  - {fileID: 11400000, guid: 1ad1249fe78ceb7449bd5a92a15aca2e, type: 2}
 --- !u!1 &248500257
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,17 +989,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 735264013db0a4301a9771c4b52dc72c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxKai: 3
+  MaxKai: 4
   SpawnPoint:
-  - {x: -5, y: -2}
-  - {x: 8, y: -8}
-  - {x: 21, y: -5}
-  - {x: 34, y: -4}
-  - {x: 31, y: -16}
-  - {x: 17, y: -24}
-  - {x: 33, y: -34}
-  - {x: 13, y: -30}
-  - {x: 13, y: -36}
+  - {x: -2, y: -1}
+  - {x: -5, y: -16}
+  - {x: 3, y: -28}
+  - {x: 8, y: -13}
+  - {x: 18, y: -5}
+  - {x: 27, y: 2}
+  - {x: 36, y: -1}
+  - {x: 33, y: -11}
+  - {x: 24, y: -11}
+  - {x: 19, y: -19}
+  - {x: 15, y: -24}
+  - {x: 25, y: -34}
+  - {x: 31, y: -24}
+  - {x: 12, y: -37}
   KaiPrefab: {fileID: 4097977071705865221, guid: d5192f17d03b748ad9ff00dc06805acf,
     type: 3}
   IsSpawned: 
@@ -8356,15 +8361,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fish
       objectReference: {fileID: 0}
-    - target: {fileID: 9071935460166455536, guid: ad82412f08eb575458c4f64cc18a04e7,
+    - target: {fileID: 9071935460166455310, guid: ad82412f08eb575458c4f64cc18a04e7,
         type: 3}
-      propertyPath: m_LocalPosition.x
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9071935460166455536, guid: ad82412f08eb575458c4f64cc18a04e7,
         type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 9071935460166455536, guid: ad82412f08eb575458c4f64cc18a04e7,
+        type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: -1.12
       objectReference: {fileID: 0}
     - target: {fileID: 9071935460166455536, guid: ad82412f08eb575458c4f64cc18a04e7,
         type: 3}
