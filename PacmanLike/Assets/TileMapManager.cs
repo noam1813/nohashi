@@ -14,6 +14,9 @@ public class TileMapManager : MonoBehaviour
     [SerializeField] private TileBase roadTileBase;
     [SerializeField] private TileBase throughedTileBase;
 
+    [SerializeField] private List<TileBase> newMaps;
+    [SerializeField] private List<TileBase> newMiniMaps;
+
     private TilemapCollider2D parentTileMapCollider;
 
     private Vector2 parentTileMapSize;
@@ -35,10 +38,12 @@ public class TileMapManager : MonoBehaviour
                 pos-=new Vector3Int((int) (5),(int) (37),0);
                 Debug.Log(pos);
                 var data = parentTileMap.GetTile(pos);
+                Debug.Log("NorHum TileMap");
+                Debug.Log(newMaps.IndexOf(data));
                 if (data != null)
                 {
                     Debug.Log(data.name);
-                    myTileMap.SetTile(pos,wallTileBase);
+                    myTileMap.SetTile(pos,newMiniMaps[newMaps.IndexOf(data)]);
                 }
                 else
                 {

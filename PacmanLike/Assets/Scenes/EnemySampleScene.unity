@@ -393,6 +393,30 @@ MonoBehaviour:
   wallTileBase: {fileID: 11400000, guid: f9acda06e7efc994d94b19761b469863, type: 2}
   roadTileBase: {fileID: 11400000, guid: c988169530cdff94cb90d63212e955d5, type: 2}
   throughedTileBase: {fileID: 11400000, guid: 5e77092fe37cdca46be7d1ce79792df1, type: 2}
+  newMaps:
+  - {fileID: 11400000, guid: 61982857025f0bc45929a31990e0d64a, type: 2}
+  - {fileID: 11400000, guid: 4008544974f87b444a3527a491affafe, type: 2}
+  - {fileID: 11400000, guid: 75ef6c83e5d1ac84eaf8b3213b4f149c, type: 2}
+  - {fileID: 11400000, guid: aaac99f443930e94ca0431d9fdf21bf2, type: 2}
+  - {fileID: 11400000, guid: dd93def7350d904489e3ccc83ff267c3, type: 2}
+  - {fileID: 11400000, guid: f8f51384a05017e42b25dfc0a10208d7, type: 2}
+  - {fileID: 11400000, guid: f18cf1f9f664eda478fd42c22b94a3e3, type: 2}
+  - {fileID: 11400000, guid: bfc7e0c3dc2b6de49bac3fd1337178f7, type: 2}
+  - {fileID: 11400000, guid: 03b2e967a5ff3774786cdf7990469d9a, type: 2}
+  - {fileID: 11400000, guid: c4906eadbdadff24aa20b40f89fd810f, type: 2}
+  - {fileID: 11400000, guid: 46a8c358a4cd5044284739e05c86242d, type: 2}
+  newMiniMaps:
+  - {fileID: 11400000, guid: 61982857025f0bc45929a31990e0d64a, type: 2}
+  - {fileID: 11400000, guid: 4008544974f87b444a3527a491affafe, type: 2}
+  - {fileID: 11400000, guid: 75ef6c83e5d1ac84eaf8b3213b4f149c, type: 2}
+  - {fileID: 11400000, guid: aaac99f443930e94ca0431d9fdf21bf2, type: 2}
+  - {fileID: 11400000, guid: dd93def7350d904489e3ccc83ff267c3, type: 2}
+  - {fileID: 11400000, guid: f8f51384a05017e42b25dfc0a10208d7, type: 2}
+  - {fileID: 11400000, guid: f18cf1f9f664eda478fd42c22b94a3e3, type: 2}
+  - {fileID: 11400000, guid: bfc7e0c3dc2b6de49bac3fd1337178f7, type: 2}
+  - {fileID: 11400000, guid: 03b2e967a5ff3774786cdf7990469d9a, type: 2}
+  - {fileID: 11400000, guid: c4906eadbdadff24aa20b40f89fd810f, type: 2}
+  - {fileID: 11400000, guid: 46a8c358a4cd5044284739e05c86242d, type: 2}
 --- !u!1 &248500257
 GameObject:
   m_ObjectHideFlags: 0
