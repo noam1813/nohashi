@@ -7219,6 +7219,36 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!1 &1265267314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1265267315}
+  m_Layer: 0
+  m_Name: MizukusaGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1265267315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265267314}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 18.337452, y: -10.278526, z: -7.201854}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1275642404
 GameObject:
   m_ObjectHideFlags: 0
@@ -7917,6 +7947,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1887377625}
   m_CullTransparentMesh: 0
+--- !u!1 &1994646540
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1994646542}
+  - component: {fileID: 1994646541}
+  m_Layer: 0
+  m_Name: MizukusaManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1994646541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994646540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651fc23f15e5a1240b5e2c818ca3e413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1896213679258928212}
+  MizukusaPrefab: {fileID: 1432505360527820542, guid: a7984ea03811d6343a70455cfeaba2f0,
+    type: 3}
+  MizukusaRoot: {fileID: 1265267315}
+  MizukusaAmount: 3
+  MizukusaSpawns:
+  - {x: 20, y: -11}
+  - {x: 33, y: -9}
+  - {x: 33, y: -34}
+--- !u!4 &1994646542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994646540}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2041811640
 GameObject:
   m_ObjectHideFlags: 0
@@ -8216,6 +8298,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a67fb0a00bb2b664a9e5ed994e731b96, type: 3}
+--- !u!114 &1896213679258928212 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1896213678147416506, guid: a67fb0a00bb2b664a9e5ed994e731b96,
+    type: 3}
+  m_PrefabInstance: {fileID: 1896213679258928211}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111602664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e00b83cb96d4d643bba437973360361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9071935459855561329
 PrefabInstance:
   m_ObjectHideFlags: 0
