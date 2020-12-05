@@ -16,6 +16,7 @@ public class TileMapManager : MonoBehaviour
 
     [SerializeField] private List<TileBase> newMaps;
     [SerializeField] private List<TileBase> newMiniMaps;
+    [SerializeField] private List<TileBase> newThroughMiniMaps;
 
     private TilemapCollider2D parentTileMapCollider;
 
@@ -68,7 +69,8 @@ public class TileMapManager : MonoBehaviour
         if (!throughedMap[(int) (5), (int) (37)])
         {
             throughedMap[(int) (converedPos.x+5), (int) (converedPos.y+37)] = true;
-            myTileMap.SetTile(converedPos, throughedTileBase);
+            var data = parentTileMap.GetTile(converedPos);
+            myTileMap.SetTile(converedPos, newThroughMiniMaps[newMaps.IndexOf(data)]);
         }
     }
 }

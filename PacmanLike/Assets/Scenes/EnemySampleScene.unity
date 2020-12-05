@@ -417,6 +417,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: de254c753cc2f9f4c8e348701a0e31a3, type: 2}
   - {fileID: 11400000, guid: 3b85892a6e4a5894cae0f122603bdba1, type: 2}
   - {fileID: 11400000, guid: 1ad1249fe78ceb7449bd5a92a15aca2e, type: 2}
+  newThroughMiniMaps:
+  - {fileID: 11400000, guid: f46f7ea7f27a90348ab6d018c35ed112, type: 2}
+  - {fileID: 11400000, guid: 2cef899142841d644afb0b6a3528dd6d, type: 2}
+  - {fileID: 11400000, guid: fb75dbe68ed0781429a72948dd6c5e56, type: 2}
+  - {fileID: 11400000, guid: fa9f3a511d56d9a408728aa817881a4c, type: 2}
+  - {fileID: 11400000, guid: 7048aff49132b354a8a10dbefdac9b41, type: 2}
+  - {fileID: 11400000, guid: 98625eb04ffa49d43bc88c9a27104beb, type: 2}
+  - {fileID: 11400000, guid: ddb55c8c0d5fe2c43ae8bd812e8de365, type: 2}
+  - {fileID: 11400000, guid: ad16bb37d3156c046b0f34f69cf8a1e5, type: 2}
+  - {fileID: 11400000, guid: 7cea4ad71b255ae4dbfb56c7e4876e36, type: 2}
+  - {fileID: 11400000, guid: 87eebbb51a3c0574db9031972bf1722a, type: 2}
+  - {fileID: 11400000, guid: 18c610277b459364c82d66709ba2cfcf, type: 2}
 --- !u!1 &248500257
 GameObject:
   m_ObjectHideFlags: 0
