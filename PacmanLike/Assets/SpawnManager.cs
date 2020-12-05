@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+// TODO: SpawnManagerとMizukusaManagerは共通点が多い
 public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager instance;
@@ -23,13 +24,6 @@ public class SpawnManager : MonoBehaviour
         ResetSpawn();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    
     /// <summary>
     /// 他のキャラと重複しない様スポーン地点を転送
     /// </summary>
@@ -45,11 +39,6 @@ public class SpawnManager : MonoBehaviour
         }
         // else
         spawnedPoints[num] = true;
-
-        if (spawnedPoints.Distinct().Count() == 1)
-        {
-            ResetSpawn();
-        }
 
         return spawnPoints[num];
     }
