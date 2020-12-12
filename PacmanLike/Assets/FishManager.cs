@@ -20,7 +20,7 @@ public class FishManager : MonoBehaviour
 
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (instance == null)
         {
@@ -30,6 +30,11 @@ public class FishManager : MonoBehaviour
         {
             DestroyImmediate(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        Spawn(3);
     }
 
     // Update is called once per frame

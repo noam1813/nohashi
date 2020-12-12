@@ -41,17 +41,20 @@ public class PlayerManager : MonoBehaviour
     }
 
 
-    private void Start()
+    private void Awake()
     {
         if (instance == null)
         {
             instance = this;
         }
-        else if(instance != this)
+        else if (instance != this)
         {
             DestroyImmediate(gameObject);
         }
-        
+    }
+    
+    private void Start()
+    {
         isSceneEnded = false;
 
         stageTilemap = grid.transform.Find("Stage").GetComponent<Tilemap>();

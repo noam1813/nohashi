@@ -11,7 +11,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private int spawnCancelRange;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (instance == null)
         {
@@ -21,6 +21,7 @@ public class SpawnManager : MonoBehaviour
         {
             DestroyImmediate(gameObject);
         }
+        
     }
 
     /// <summary>
