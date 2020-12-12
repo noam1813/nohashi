@@ -15,6 +15,10 @@ public class TitleSceneManager : MonoBehaviour
     public GameObject checkExit;
     public GameObject pressEnter;
     Button button;
+
+    private AudioSource audioSource;
+    public AudioClip[] audioClip = new AudioClip[10];
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +34,7 @@ public class TitleSceneManager : MonoBehaviour
         buttonSummary.SetActive(false);
         checkStart.SetActive(false);
         checkExit.SetActive(false);
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -48,6 +53,7 @@ public class TitleSceneManager : MonoBehaviour
         buttonSummary.SetActive(false);
         checkStart.SetActive(true);
         button = GameObject.Find("Canvas/CheckStartPanel/CheckStartButtonN").GetComponent<Button>();
+        SEPlay(1);
         //ボタンが選択された状態になる
         button.Select();
     }
@@ -99,6 +105,7 @@ public class TitleSceneManager : MonoBehaviour
         checkExit.SetActive(false);
         StartCoroutine(Appearance());
         button = GameObject.Find("Canvas/ButtonSummary/StartButton").GetComponent<Button>();
+        SEPlay(2);
         //ボタンが選択された状態になる
         button.Select();
     }
@@ -121,4 +128,10 @@ public class TitleSceneManager : MonoBehaviour
             yield return null;
          }
      }
+
+    public void SEPlay(int num)
+    {
+        audioSource.clip = audioClip[num];
+        audioSource.Play();
+    }
 }
