@@ -49,7 +49,6 @@ public class ResultDataManager : MonoBehaviour
     }
 }
 
-
 [System.Serializable]
 public class ResultData
 {
