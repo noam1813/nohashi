@@ -17,12 +17,9 @@ public class CameraManager : MonoBehaviour
         transform.position = new Vector3(5,5,-10);
         Vector3 center = Stage.GetComponent<TilemapCollider2D>().bounds.center;
         Vector3 extent = Stage.GetComponent<TilemapCollider2D>().bounds.extents;
-        Debug.Log(center);
         Vector2 screenSize = GetComponent<Camera>().ScreenToWorldPoint(new Vector2(Screen.width,Screen.height)); 
         NorthEast = new Vector2(center.x+extent.x-screenSize.x/2+2.3f,center.y+extent.y-screenSize.y/2+0.3f);
         SouthWest = new Vector2(center.x-extent.x+screenSize.x/2-2.3f,center.y-extent.y+screenSize.y/2-0.3f);
-        Debug.Log(NorthEast);
-        Debug.Log(SouthWest);
     }
 
     // Update is called once per frame

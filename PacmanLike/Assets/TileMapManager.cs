@@ -37,13 +37,9 @@ public class TileMapManager : MonoBehaviour
             {
                 Vector3Int pos = new Vector3Int(j,i,0);
                 pos-=new Vector3Int((int) (5),(int) (37),0);
-                Debug.Log(pos);
                 var data = parentTileMap.GetTile(pos);
-                Debug.Log("NorHum TileMap");
-                Debug.Log(newMaps.IndexOf(data));
                 if (data != null)
                 {
-                    Debug.Log(data.name);
                     myTileMap.SetTile(pos,newMiniMaps[newMaps.IndexOf(data)]);
                 }
                 else
@@ -65,7 +61,6 @@ public class TileMapManager : MonoBehaviour
     public void SetThroughedMap(Vector3 pos)
     {
         Vector3Int converedPos = myTileMap.GetComponent<GridLayout>().WorldToCell(pos);
-        Debug.Log(converedPos);
         if (!throughedMap[(int) (5), (int) (37)])
         {
             throughedMap[(int) (converedPos.x+5), (int) (converedPos.y+37)] = true;

@@ -327,7 +327,7 @@ MonoBehaviour:
   nowDay: 1
   timeZone: 0
   nowTime: 0
-  maxTime: 10
+  maxTime: 120
   TimeZoneIcon: {fileID: 1325329215}
   TimeZoneProgressCircle: {fileID: 1562801694}
   nowDayText: {fileID: 421928803}
@@ -777,6 +777,7 @@ MonoBehaviour:
   - {x: 33, y: -34}
   - {x: 13, y: -30}
   - {x: 13, y: -36}
+  spawnCancelRange: 10
 --- !u!1001 &579395821
 PrefabInstance:
   m_ObjectHideFlags: 0

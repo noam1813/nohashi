@@ -8,10 +8,12 @@ using System.Runtime.CompilerServices;
 
 public class PlayerManager : MonoBehaviour
 {
+    public static PlayerManager instance;
+    
     public Grid grid;
     public Tilemap stageTilemap;
     public int nowKai;
-    
+
     [SerializeField] private Direction nowDirection;
     private Direction ReserveDirection;
     private Direction nowAnimatingDirection;
@@ -38,6 +40,15 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if(instance != this)
+        {
+            DestroyImmediate(gameObject);
+        }
+        
         stageTilemap = grid.transform.Find("Stage").GetComponent<Tilemap>();
         ReserveDirection = Direction.Left;
         AroundVector[0] = new Vector3(1, 0, 0); //右
@@ -444,6 +455,12 @@ public class PlayerManager : MonoBehaviour
         
         //秘匿時、暗くなるエフェクトをかける
         StageEffectManager.instance.SetShadow(mode);
+    }
+
+
+    public Vector2 SetPlayerPosition()
+    {
+        return transform.position;
     }
 
 }
