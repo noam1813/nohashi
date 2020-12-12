@@ -12,6 +12,8 @@ public class StageEffectManager : MonoBehaviour
 
     [SerializeField] private RectTransform MizukusaGroup;
 
+    [SerializeField] private List<SpriteRenderer> MizukusaMaterial;
+
     [SerializeField] private Vector3 MizukusaShowPos;
     [SerializeField] private Vector3 MizukusaHidePos;
 
@@ -79,17 +81,23 @@ public class StageEffectManager : MonoBehaviour
     {
         if (mode)
         {
-            MizukusaGroup.DOLocalMove(
-                MizukusaShowPos,
-                1f
-            );
+            for (int i = 0; i < MizukusaMaterial.Count; i++)
+            {
+                MizukusaMaterial[i].DOColor(
+                    new Color32(0,139,49,200), 
+                    1f
+                    );
+            }
         }
         else
         {
-            MizukusaGroup.DOLocalMove(
-                MizukusaHidePos,
-                1f
-            );
+            for (int i = 0; i < MizukusaMaterial.Count; i++)
+            {
+                MizukusaMaterial[i].DOColor(
+                    new Color32(0,139,49,0), 
+                    1f
+                );
+            }
         }
         
     }

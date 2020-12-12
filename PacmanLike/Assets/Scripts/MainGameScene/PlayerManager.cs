@@ -442,8 +442,7 @@ public class PlayerManager : MonoBehaviour
             useMizukusa = null;
         }
         
-        //秘匿時、暗くなるエフェクトをかける
-        StageEffectManager.instance.SetShadow(mode);
+        StageEffectManager.instance.SetMizukusa(mode);
     }
 
 }
