@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
@@ -25,6 +26,8 @@ public class PlayerManager : MonoBehaviour
     public bool isHide;
     private Mizukusa useMizukusa;
     
+
+    private bool isSceneEnded;
 
     //SerializeField : 変数の扱いをprivate扱いにしながらインスペクタに入力欄を表示することができる
     [SerializeField] private float speed = 1.0f;
@@ -49,6 +52,8 @@ public class PlayerManager : MonoBehaviour
             DestroyImmediate(gameObject);
         }
         
+        isSceneEnded = false;
+
         stageTilemap = grid.transform.Find("Stage").GetComponent<Tilemap>();
         ReserveDirection = Direction.Left;
         AroundVector[0] = new Vector3(1, 0, 0); //右
@@ -327,6 +332,17 @@ public class PlayerManager : MonoBehaviour
             case "Enemy":
                 Debug.Log("ゲームオーバー");
                 break;
+        if (other.gameObject.tag == "Enemy" && TimeManager.instance.timeZone == TimeZoneData.Night && !isSceneEnded)
+        {
+            isSceneEnded = true;
+
+            SceneFadeManager.Instance.StartFade(SceneFadeManager.FADE_TYPE.FADE_OUTIN, 0.4f, () =>
+            {
+                SceneManager.LoadScene("GameOverScene");
+            });
+
+            //Debug.Log("ゲームオーバー");
+
         }
 
         if (other.gameObject.tag == "Kai")
@@ -353,7 +369,13 @@ public class PlayerManager : MonoBehaviour
 
             if (nowKai >= KaiManager.instance.MaxKai)
             {
-                Debug.Log("貝全部ゲット");
+                ResultDataManager.instance.SetResultData();
+
+                SceneFadeManager.Instance.StartFade(SceneFadeManager.FADE_TYPE.FADE_OUTIN, 0.4f, () =>
+                {
+                    SceneManager.LoadScene("ResultScene");
+                });
+                //Debug.Log("貝全部ゲット");
             }
         }
     }

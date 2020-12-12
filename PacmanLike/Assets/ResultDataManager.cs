@@ -35,7 +35,7 @@ public class ResultDataManager : MonoBehaviour
 
     void SetTotalTime()
     {
-        TimeManager.instance.GetTotalTime();
+        data.clearTime = TimeManager.instance.GetTotalTime();
     }
 
     void SetDefeatedEnemiesAmount()
@@ -48,7 +48,6 @@ public class ResultDataManager : MonoBehaviour
         
     }
 }
-
 
 [System.Serializable]
 public class ResultData
