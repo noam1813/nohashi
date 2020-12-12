@@ -327,11 +327,7 @@ public class PlayerManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        switch (other.gameObject.tag)
-        {
-            case "Enemy":
-                Debug.Log("ゲームオーバー");
-                break;
+
         if (other.gameObject.tag == "Enemy" && TimeManager.instance.timeZone == TimeZoneData.Night && !isSceneEnded)
         {
             isSceneEnded = true;
@@ -486,3 +482,4 @@ public class PlayerManager : MonoBehaviour
     }
 
 }
+
