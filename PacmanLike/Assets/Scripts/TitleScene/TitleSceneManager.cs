@@ -53,7 +53,7 @@ public class TitleSceneManager : MonoBehaviour
         buttonSummary.SetActive(false);
         checkStart.SetActive(true);
         button = GameObject.Find("Canvas/CheckStartPanel/CheckStartButtonN").GetComponent<Button>();
-        SEPlay(1);
+        //SEPlay(1);
         //ボタンが選択された状態になる
         button.Select();
     }
@@ -105,7 +105,7 @@ public class TitleSceneManager : MonoBehaviour
         checkExit.SetActive(false);
         StartCoroutine(Appearance());
         button = GameObject.Find("Canvas/ButtonSummary/StartButton").GetComponent<Button>();
-        SEPlay(2);
+        //SEPlay(2);
         //ボタンが選択された状態になる
         button.Select();
     }
