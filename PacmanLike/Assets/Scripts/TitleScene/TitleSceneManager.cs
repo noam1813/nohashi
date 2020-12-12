@@ -110,7 +110,7 @@ public class TitleSceneManager : MonoBehaviour
             //Vector3 nowPos = buttonSummary.GetComponent<RectTransform>().position;
             //Vector3 nowPos = GameObject.Find("Canvas/ButtonSummary").transform.position;
             if(i == 40){
-                rt.localPosition = new Vector3 (-1300f, 160f, rt.localPosition.z);
+                rt.localPosition = new Vector3 (-1300f, 120f, rt.localPosition.z);
                 //nowPos.x = -1000f;
             //   GameObject.Find("Canvas/ButtonSummary").transform.position = new Vector3 (-10f, nowPos.y, nowPos.z);
             }else{
