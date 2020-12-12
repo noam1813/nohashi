@@ -10,6 +10,13 @@ public class StageEffectManager : MonoBehaviour
     
     [SerializeField] private Image NightShadow;
 
+    [SerializeField] private RectTransform MizukusaGroup;
+
+    [SerializeField] private List<SpriteRenderer> MizukusaMaterial;
+
+    [SerializeField] private Vector3 MizukusaShowPos;
+    [SerializeField] private Vector3 MizukusaHidePos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,5 +75,30 @@ public class StageEffectManager : MonoBehaviour
             
             ExitShadowSequence.Play();
         }
+    }
+
+    public void SetMizukusa(bool mode)
+    {
+        if (mode)
+        {
+            for (int i = 0; i < MizukusaMaterial.Count; i++)
+            {
+                MizukusaMaterial[i].DOColor(
+                    new Color32(0,139,49,200), 
+                    1f
+                    );
+            }
+        }
+        else
+        {
+            for (int i = 0; i < MizukusaMaterial.Count; i++)
+            {
+                MizukusaMaterial[i].DOColor(
+                    new Color32(0,139,49,0), 
+                    1f
+                );
+            }
+        }
+        
     }
 }
