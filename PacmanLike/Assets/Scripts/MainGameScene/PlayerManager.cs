@@ -349,18 +349,22 @@ public class PlayerManager : MonoBehaviour
             if (nowKai == 1)
             {
                 KaiManager.instance.kai1.color = new Color(255, 255, 255, 255);
+                AudioManager.instance.Play("KaiGet");
             }
             else if (nowKai == 2)
             {
                 KaiManager.instance.kai2.color = new Color(255, 255, 255, 255);
+                AudioManager.instance.Play("KaiGet");
             }
             else if (nowKai == 3)
             {
-                KaiManager.instance.kai3.color = new Color(255, 255, 255, 255); 
+                KaiManager.instance.kai3.color = new Color(255, 255, 255, 255);
+                AudioManager.instance.Play("KaiGet");
             }
             else if (nowKai == 4)
             {
-                KaiManager.instance.kai4.color = new Color(255, 255, 255, 255); 
+                KaiManager.instance.kai4.color = new Color(255, 255, 255, 255);
+                AudioManager.instance.Play("LastKaiGet");
             }
 
             if (nowKai >= KaiManager.instance.MaxKai)
