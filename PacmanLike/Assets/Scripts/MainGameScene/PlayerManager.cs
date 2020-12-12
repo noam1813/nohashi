@@ -335,6 +335,10 @@ public class PlayerManager : MonoBehaviour
             {
                 KaiManager.instance.kai3.color = new Color(255, 255, 255, 255); 
             }
+            else if (nowKai == 4)
+            {
+                KaiManager.instance.kai4.color = new Color(255, 255, 255, 255); 
+            }
 
             if (nowKai >= KaiManager.instance.MaxKai)
             {
