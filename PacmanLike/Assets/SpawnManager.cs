@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+// TODO: SpawnManagerとMizukusaManagerは共通点が多い
 public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager instance;
     [SerializeField] private List<Vector2> spawnPoints;
-    private List<bool> spawnedPoints;
+    [SerializeField] private int spawnCancelRange;
 
     // Start is called before the first frame update
     void Start()
@@ -20,16 +21,8 @@ public class SpawnManager : MonoBehaviour
         {
             DestroyImmediate(gameObject);
         }
-        ResetSpawn();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    
     /// <summary>
     /// 他のキャラと重複しない様スポーン地点を転送
     /// </summary>
@@ -37,26 +30,29 @@ public class SpawnManager : MonoBehaviour
     public Vector2 Spawn()
     {
         SelectedNumber:
+        
         int num = Random.Range(0, spawnPoints.Count);
 
-        if (spawnedPoints[num])
+        if (IsNearToPlayerPosition(num))
         {
             goto SelectedNumber;
         }
-        // else
-        spawnedPoints[num] = true;
-
-        if (spawnedPoints.Distinct().Count() == 1)
-        {
-            ResetSpawn();
-        }
-
+        
         return spawnPoints[num];
     }
 
 
-    public void ResetSpawn()
+    public bool IsNearToPlayerPosition(int number)
     {
-        spawnedPoints = Enumerable.Repeat<bool>(false, spawnPoints.Count).ToList();
+        Vector2 spawnPos = spawnPoints[number];
+        Vector2 playerPos = PlayerManager.instance.SetPlayerPosition();
+
+        if (Vector2.Distance(spawnPos, playerPos) <= spawnCancelRange)
+        {
+            return true;
+        }
+
+        return false;
     }
+
 }

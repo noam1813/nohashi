@@ -16,6 +16,7 @@ public class KaiManager : MonoBehaviour
     public Image kai1;
     public Image kai2;
     public Image kai3;
+    public Image kai4;
     
     // Start is called before the first frame update
     void Start()

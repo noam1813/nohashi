@@ -17,6 +17,8 @@ public class FishManager : MonoBehaviour
     [SerializeField] private GameObject player;
 
     [SerializeField] private int defeatedFishes;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -71,7 +73,6 @@ public class FishManager : MonoBehaviour
             Fishes.Add(script);
         }
         
-        SpawnManager.instance.ResetSpawn();
     }
 
     public void RemoveFish(FishMove target)

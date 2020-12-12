@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Kai
+  - Mizukusa
   layers:
   - Default
   - TransparentFX
