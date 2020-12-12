@@ -476,6 +476,7 @@ public class PlayerManager : MonoBehaviour
         }
         
         StageEffectManager.instance.SetMizukusa(mode);
+        StageEffectManager.instance.SetShadow(mode);
     }
 
 

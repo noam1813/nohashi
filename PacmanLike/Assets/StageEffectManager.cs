@@ -84,7 +84,7 @@ public class StageEffectManager : MonoBehaviour
             for (int i = 0; i < MizukusaMaterial.Count; i++)
             {
                 MizukusaMaterial[i].DOColor(
-                    new Color32(0,139,49,200), 
+                    new Color32(0,99,26,200), 
                     1f
                     );
             }
@@ -94,7 +94,7 @@ public class StageEffectManager : MonoBehaviour
             for (int i = 0; i < MizukusaMaterial.Count; i++)
             {
                 MizukusaMaterial[i].DOColor(
-                    new Color32(0,139,49,0), 
+                    new Color32(0,99,26,0), 
                     1f
                 );
             }
