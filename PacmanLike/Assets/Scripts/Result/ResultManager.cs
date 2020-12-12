@@ -15,11 +15,17 @@ public class ResultManager : MonoBehaviour
     [SerializeField] private GameObject cleatTimeScoreText;
     [SerializeField] private GameObject defeatedEnemiesAmountText;
     [SerializeField] private GameObject defeatedEnemiesAmountScoreText;
+    [SerializeField] private GameObject totalScoreText;
 
     [SerializeField] private GameObject enterImage;
     [SerializeField] private GameObject titleText;
 
-    
+    //ランクごとのテキストオブジェクト
+    [SerializeField] private GameObject rankS;
+    [SerializeField] private GameObject rankA;
+    [SerializeField] private GameObject rankB;
+    [SerializeField] private GameObject rankC;
+
     private float sin;
     private bool isSceneEnded;
 
@@ -31,6 +37,16 @@ public class ResultManager : MonoBehaviour
 
     //タイトルシーンに遷移できるようになるまでの時間
     [SerializeField] private float timeOfTranableTitleScene = 3.0f;
+
+    //スコアの評価基準
+    [SerializeField] private int[] listsOfTimeEvaluation = new int[3];
+    [SerializeField] private int[] listsOfDefeatedEnemiesEvaluation = new int[2];
+    [SerializeField] private int[] listsOfTotalScoreEvaluation = new int[3];
+
+
+    //評価ごとに得られるスコア
+    [SerializeField] private int[] listsOfTimeEvaluationScore = new int[4];
+    [SerializeField] private int[] listsOfDefeatedEnemiesEvaluationScore = new int[3];
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +62,11 @@ public class ResultManager : MonoBehaviour
         timeFromSceneStarted = 0;
 
         isSceneEnded = false;
+
+        Text text = JadgeRank(clearTime, defeatedEnemiesAmount);
+        totalScoreText.GetComponent<Text>().text = text.text;
+        totalScoreText.GetComponent<Text>().color = text.color;
+
 
         enterImage.GetComponent<Image>().color = new Color(255, 255, 255, 0);
         titleText.GetComponent<Text>().color = new Color(255, 255, 255, 0);
@@ -73,5 +94,58 @@ public class ResultManager : MonoBehaviour
         }
 
         timeFromSceneStarted += Time.deltaTime;
+    }
+
+    private Text JadgeRank(int clearTimeScore, int defeatedEnemiesAmountScore)
+    {
+        int totalScore = 0;
+
+        if (clearTimeScore <= listsOfTimeEvaluation[0])
+        {
+            totalScore += listsOfTimeEvaluationScore[0];
+        }
+        else if (clearTimeScore <= listsOfTimeEvaluation[1])
+        {
+            totalScore += listsOfTimeEvaluationScore[1];
+        }
+        else if (clearTimeScore <= listsOfTimeEvaluation[2])
+        {
+            totalScore += listsOfTimeEvaluationScore[2];
+        }
+        else
+        {
+            totalScore += listsOfTimeEvaluationScore[3];
+        }
+
+        if (defeatedEnemiesAmountScore >= listsOfDefeatedEnemiesEvaluation[0])
+        {
+            totalScore += listsOfDefeatedEnemiesEvaluationScore[0];
+        }
+        else if (defeatedEnemiesAmountScore >= listsOfDefeatedEnemiesEvaluation[1])
+        {
+            totalScore += listsOfDefeatedEnemiesEvaluationScore[1];
+        }
+        else
+        {
+            totalScore += listsOfDefeatedEnemiesEvaluationScore[2];
+        }
+
+        if(totalScore >= listsOfTotalScoreEvaluation[0])
+        {
+            return rankS.GetComponent<Text>();
+        }
+        else if (totalScore >= listsOfTotalScoreEvaluation[1])
+        {
+            return rankA.GetComponent<Text>();
+        }
+        else if (totalScore >= listsOfTotalScoreEvaluation[2])
+        {
+            return rankB.GetComponent<Text>();
+        }
+        else
+        {
+            return rankC.GetComponent<Text>();
+        }
+
     }
 }
