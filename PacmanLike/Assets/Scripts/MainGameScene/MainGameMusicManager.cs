@@ -176,7 +176,7 @@ public class MainGameMusicManager : MonoBehaviour
         {
             noonBGM.volume = 0f;
             nightBGM.volume = 0f;
-            yield return new WaitForSeconds(1f);
+            //yield return new WaitForSeconds(1f);
             battleBGM.Play();
         }
         else
@@ -200,5 +200,7 @@ public class MainGameMusicManager : MonoBehaviour
                     )
                 );
         }
+
+        yield return null;
     }
 }
