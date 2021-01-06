@@ -326,7 +326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nowDay: 1
   nowTime: 0
-  maxTime: 240
+  maxTime: 30
   TimeZoneIcon: {fileID: 1325329215}
   TimeZoneProgressCircle: {fileID: 1562801694}
   nowDayText: {fileID: 421928803}
