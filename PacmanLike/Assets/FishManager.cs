@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,9 +39,13 @@ public class FishManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        bool isChaseMode = IsChasingFish();
+        if(isChaseMode != MainGameMusicManager.instance.isBattle)
+        {
+            StartCoroutine(MainGameMusicManager.instance.SwitchBattle(isChaseMode));
+        }
     }
 
     /// <summary>
@@ -89,5 +94,12 @@ public class FishManager : MonoBehaviour
     public int GetDefeatedFishes()
     {
         return defeatedFishes;
+    }
+
+
+    public bool IsChasingFish()
+    {
+        bool answer = !Fishes.All(x => x.isChasing == false);
+        return answer;
     }
 }

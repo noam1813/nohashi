@@ -1,13 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class MainGameMusicManager : MonoBehaviour
 {
+    public static MainGameMusicManager instance;
+
     public AudioSource noonBGM;
     public AudioSource nightBGM;
+    public AudioSource battleBGM;
 
     public bool isFade = false;
+    public bool isBattle = false;
     public double fadeOutSeconds = 1.0f;
     public double fadeInSeconds = 1.0f;
     public float noonVolume = 0.1f;
@@ -19,6 +24,15 @@ public class MainGameMusicManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            DestroyImmediate(gameObject);
+        }
+
         isFade = false;
         //noonBGM.Play();
         StartCoroutine("StartGame");
@@ -151,5 +165,40 @@ public class MainGameMusicManager : MonoBehaviour
             }
         }
             
+    }
+
+    
+    public IEnumerator SwitchBattle(bool mode)
+    {
+        isBattle = mode;
+
+        if(isBattle)
+        {
+            noonBGM.volume = 0f;
+            nightBGM.volume = 0f;
+            yield return new WaitForSeconds(1f);
+            battleBGM.Play();
+        }
+        else
+        {
+            battleBGM.Stop();
+            Sequence seq = DOTween.Sequence();
+            seq.Append(
+                DOTween.To(
+                    () => noonBGM.volume,
+                    num => noonBGM.volume = num,
+                    1f,
+                    1f
+                    )
+                );
+            seq.Join(
+                DOTween.To(
+                    () => nightBGM.volume,
+                    num => nightBGM.volume = num,
+                    1f,
+                    1f
+                    )
+                );
+        }
     }
 }

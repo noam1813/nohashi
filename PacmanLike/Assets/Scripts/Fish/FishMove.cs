@@ -60,7 +60,7 @@ public class FishMove : MonoBehaviour
     //プレイヤーを感知しているかどうか
     bool isSensing;
     //プレイヤーを追跡しているかどうか
-    bool isChasing;
+    public bool isChasing;
     //魚の発見状態が継続する時間
     public float chaseTime = 3.0f;
     //追跡タイマー
