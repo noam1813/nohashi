@@ -54,15 +54,19 @@ public class FishManager : MonoBehaviour
     /// <param name="data">時間帯</param>
     public void ChangeFishMode(TimeZoneData data)
     {
+        Debug.Log("Nahyun001");
+        Debug.Log(Fishes.Count);
         foreach (var fish in Fishes)
         {
             switch (data)
             {
                 case TimeZoneData.Noon:
                     fish.isNoon = true;
+                    Debug.Log("Through Is Noon(True)");
                     break;
                 case TimeZoneData.Night:
                     fish.isNoon = false;
+                    Debug.Log("Through Is Noon(False)");
                     break;
             }
         }

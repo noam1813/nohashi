@@ -22,6 +22,9 @@ public class FishMove : MonoBehaviour
     //プレイヤー
     public GameObject playerObject;
 
+    //ミニマップ
+    public GameObject minimap;
+
     private Direction direction;
     private SpriteRenderer sr;
     
@@ -115,6 +118,7 @@ public class FishMove : MonoBehaviour
 
         isSensing = false;
         isChasing = false;
+        ChangeChase(false);
         
         sensibleDistanceInNight = Mathf.Pow(sensibleDistanceInNight, 2);
 
@@ -232,6 +236,7 @@ public class FishMove : MonoBehaviour
         {
             chaseTimer = 0.0f;
             isChasing = false;
+            ChangeChase(false);
             speed = normalSpeed;
             //追跡クールタイムに入る
             isChasingCoolTime = true;
@@ -515,6 +520,7 @@ public class FishMove : MonoBehaviour
         if (DiscoverPlayer(visibleDistanceInNight))
         {
             isChasing = true;
+            ChangeChase(true);
             chaseTimer = 0.0f;
             speed = chaseSpeed;
 
@@ -768,6 +774,19 @@ public class FishMove : MonoBehaviour
             
 
         animator.Play(animName);
+    }
+
+
+    public void ChangeChase(bool mode)
+    {
+        if(mode)
+        {
+            minimap.SetActive(true);
+        }
+        else
+        {
+            minimap.SetActive(false);
+        }
     }
 
 }

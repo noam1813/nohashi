@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5165428209847203023
 Transform:
   m_ObjectHideFlags: 0
@@ -148,6 +148,7 @@ MonoBehaviour:
   stageTilemap: {fileID: 0}
   isNoon: 1
   playerObject: {fileID: 0}
+  minimap: {fileID: 580422932456517374}
   speed: 3
   normalSpeed: 3
   runAwaySpeed: 7
