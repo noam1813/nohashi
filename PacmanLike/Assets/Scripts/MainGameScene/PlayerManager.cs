@@ -333,12 +333,7 @@ public class PlayerManager : MonoBehaviour
 
         if (other.gameObject.tag == "Enemy" && TimeManager.instance.timeZone == TimeZoneData.Night && !isSceneEnded)
         {
-            isSceneEnded = true;
-
-            SceneFadeManager.Instance.StartFade(SceneFadeManager.FADE_TYPE.FADE_OUTIN, 0.4f, () =>
-            {
-                SceneManager.LoadScene("GameOverScene");
-            });
+            GameOver();
 
             //Debug.Log("ゲームオーバー");
 
@@ -488,5 +483,15 @@ public class PlayerManager : MonoBehaviour
         return transform.position;
     }
 
+
+    public void GameOver()
+    {
+        isSceneEnded = true;
+
+        SceneFadeManager.Instance.StartFade(SceneFadeManager.FADE_TYPE.FADE_OUTIN, 0.4f, () =>
+        {
+            SceneManager.LoadScene("GameOverScene");
+        });
+    }
 }
 

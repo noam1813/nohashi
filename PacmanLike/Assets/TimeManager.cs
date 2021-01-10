@@ -112,12 +112,19 @@ public class TimeManager : MonoBehaviour
             case TimeZoneData.Night:
                 // 夜から昼に変えるとき、日付の加算を行う
                 nowDay++;
+                
+                if (nowDay >= 4)
+                {
+                    PlayerManager.instance.GameOver();
+                }
+                
                 timeZone = TimeZoneData.Noon;
                 TimeZoneIcon.sprite = Resources.Load<Sprite>("TimeZoneIcon/Noon");
                 nowDayText.text = nowDay + "Day";
                 StageEffectManager.instance.SetShadow(false);
                 musicManager.StartCoroutine("ToNoon");
                 FishManager.instance.Spawn();
+                
                 break;
             
             default:
