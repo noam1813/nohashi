@@ -42,6 +42,7 @@ public class TitleSceneManager : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Return) && pressEnter.activeSelf)
         {
+            SEPlay(1);
             BackToMenu();
         }
     }
