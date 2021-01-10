@@ -723,6 +723,7 @@ public class FishMove : MonoBehaviour
                 Debug.Log("食べられちゃった!!");
                 FishManager.instance.RemoveFish(this);
                 Destroy(this.gameObject);
+                AudioManager.instance.Play("EatFish");
             }
         }
     }
