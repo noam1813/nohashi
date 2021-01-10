@@ -6,6 +6,8 @@ using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using UnityEngine.SocialPlatforms;
+using Random = System.Random;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -16,11 +18,14 @@ public class PlayerManager : MonoBehaviour
     public int nowKai;
 
     [SerializeField] private Direction nowDirection;
+    [SerializeField] private List<Vector2> spawnPoints;
     private Direction ReserveDirection;
     private Direction nowAnimatingDirection;
     private SpriteRenderer sr;
     private Vector3[] AroundVector = new Vector3[4];
     private Animator animator;
+    
+    
     
     // 水草関係
     public bool isHide;
@@ -56,6 +61,8 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         isSceneEnded = false;
+
+        transform.position = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)];
 
         stageTilemap = grid.transform.Find("Stage").GetComponent<Tilemap>();
         ReserveDirection = Direction.Left;

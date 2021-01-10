@@ -856,7 +856,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2e6ea3724a4790b43b45382845ace921, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 31af690ad716a19419d7cc89e86e994b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -9209,7 +9209,7 @@ PrefabInstance:
     - target: {fileID: 1896213678147416504, guid: a67fb0a00bb2b664a9e5ed994e731b96,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1896213678147416504, guid: a67fb0a00bb2b664a9e5ed994e731b96,
         type: 3}
@@ -9263,6 +9263,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1896213678147416506, guid: a67fb0a00bb2b664a9e5ed994e731b96,
         type: 3}
+      propertyPath: spawnPoints.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896213678147416506, guid: a67fb0a00bb2b664a9e5ed994e731b96,
+        type: 3}
       propertyPath: grid
       value: 
       objectReference: {fileID: 57693392}
@@ -9271,6 +9276,36 @@ PrefabInstance:
       propertyPath: stageTilemap
       value: 
       objectReference: {fileID: 1124461476}
+    - target: {fileID: 1896213678147416506, guid: a67fb0a00bb2b664a9e5ed994e731b96,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[0].y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896213678147416506, guid: a67fb0a00bb2b664a9e5ed994e731b96,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[1].x
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896213678147416506, guid: a67fb0a00bb2b664a9e5ed994e731b96,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[1].y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896213678147416506, guid: a67fb0a00bb2b664a9e5ed994e731b96,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[2].y
+      value: -31
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896213678147416506, guid: a67fb0a00bb2b664a9e5ed994e731b96,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[3].x
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896213678147416506, guid: a67fb0a00bb2b664a9e5ed994e731b96,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[3].y
+      value: -31
+      objectReference: {fileID: 0}
     - target: {fileID: 1896213678147416507, guid: a67fb0a00bb2b664a9e5ed994e731b96,
         type: 3}
       propertyPath: m_Name
