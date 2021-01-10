@@ -811,6 +811,7 @@ MonoBehaviour:
   - {x: 33, y: -34}
   - {x: 13, y: -30}
   - {x: 13, y: -36}
+  spawnAmount: 050000000400000003000000
   spawnCancelRange: 10
 --- !u!1001 &579395821
 PrefabInstance:

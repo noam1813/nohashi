@@ -35,7 +35,7 @@ public class FishManager : MonoBehaviour
 
     private void Start()
     {
-        Spawn(3);
+        Spawn();
     }
 
     // Update is called once per frame
@@ -73,8 +73,10 @@ public class FishManager : MonoBehaviour
     }
 
 
-    public void Spawn(int amount)
+    public void Spawn()
     {
+        int amount = SpawnManager.instance.GetSpawnAmount(TimeManager.instance.nowDay);
+        
         for (var i = 0; i < amount; i++)
         {
             Vector2 point = SpawnManager.instance.Spawn();

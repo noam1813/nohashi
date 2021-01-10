@@ -30,7 +30,7 @@ public class TimeManager : MonoBehaviour
     private MainGameMusicManager musicManager;
     
     //現在の日付。１日目など
-    [SerializeField] private int nowDay = 1;
+    public int nowDay = 1;
 
     //昼か夜かを示す
     //[SerializeField] private TimeZoneData timeZone;
@@ -117,14 +117,14 @@ public class TimeManager : MonoBehaviour
                 nowDayText.text = nowDay + "Day";
                 StageEffectManager.instance.SetShadow(false);
                 musicManager.StartCoroutine("ToNoon");
+                FishManager.instance.Spawn();
                 break;
             
             default:
                 Debug.LogError("時刻が正しく設定されていません");
                 break;
         }
-
-        FishManager.instance.Spawn(3);
+        
         FishManager.instance.ChangeFishMode(timeZone);
     }
 

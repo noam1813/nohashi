@@ -8,6 +8,7 @@ public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager instance;
     [SerializeField] private List<Vector2> spawnPoints;
+    [SerializeField] private List<int> spawnAmount;
     [SerializeField] private int spawnCancelRange;
 
     // Start is called before the first frame update
@@ -40,6 +41,12 @@ public class SpawnManager : MonoBehaviour
         }
         
         return spawnPoints[num];
+    }
+
+
+    public int GetSpawnAmount(int date)
+    {
+        return spawnAmount[date-1];
     }
 
 
