@@ -120,7 +120,7 @@ public class TimeManager : MonoBehaviour
                 
                 timeZone = TimeZoneData.Noon;
                 TimeZoneIcon.sprite = Resources.Load<Sprite>("TimeZoneIcon/Noon");
-                nowDayText.text = nowDay + "Day";
+                nowDayText.text = "DAY" + nowDay;
                 StageEffectManager.instance.SetShadow(false);
                 musicManager.StartCoroutine("ToNoon");
                 FishManager.instance.Spawn();
