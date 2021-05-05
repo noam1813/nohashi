@@ -15,6 +15,7 @@ public class TitleSceneManager : MonoBehaviour
     public GameObject checkExit;
     public GameObject pressEnter;
     public GameObject scoreBoard;
+    public GameObject BackGround;
     Button button;
 
     private AudioSource audioSource;
@@ -33,10 +34,12 @@ public class TitleSceneManager : MonoBehaviour
         checkStart = GameObject.Find("CheckStartPanel");
         checkExit = GameObject.Find("CheckExitPanel");
         scoreBoard = GameObject.Find("ScoreBoardPanel");
+        BackGround = GameObject.Find("BackGround");
         buttonSummary.SetActive(false);
         checkStart.SetActive(false);
         checkExit.SetActive(false);
         scoreBoard.SetActive(false);
+        BackGround.SetActive(false);
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -76,6 +79,7 @@ public class TitleSceneManager : MonoBehaviour
 
     //　SCORE BOARDを押したら実行する
     public void ShowScoreBoard() {
+        BackGround.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);//選択の解除
         buttonSummary.SetActive(false);
         scoreBoard.SetActive(true);
@@ -114,6 +118,7 @@ public class TitleSceneManager : MonoBehaviour
         checkStart.SetActive(false);
         checkExit.SetActive(false);
         scoreBoard.SetActive(false);
+        BackGround.SetActive(false);
         StartCoroutine(Appearance());
         button = GameObject.Find("Canvas/ButtonSummary/StartButton").GetComponent<Button>();
         //SEPlay(2);

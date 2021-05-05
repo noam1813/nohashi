@@ -13,6 +13,8 @@ public enum PauseImageType
 
 public class PauseManager : MonoBehaviour
 {
+    public static PauseManager instance;
+
     //ポーズ中の説明スプライト
     public Sprite howToPlay;
     public Sprite howToControll;
@@ -41,11 +43,16 @@ public class PauseManager : MonoBehaviour
 
     //ポーズした時に表示するUIのプレハブ
     public GameObject pauseUIPrefab;
+
     //ポーズUIのインスタンス
     private GameObject pauseUIInstance;
+
     private RectTransform instanceRectTransform;
+
     //ポーズUIの画像
     private Image pauseImage;
+
+    public GameObject BlackFilter;
 
     //現在表示されている画像が何か
     private PauseImageType nowImage;
@@ -55,6 +62,17 @@ public class PauseManager : MonoBehaviour
     {
         isEasing = false;
         isPause = false;
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
+        BlackFilter.SetActive(false);
     }
 
     // Update is called once per frame
@@ -66,7 +84,7 @@ public class PauseManager : MonoBehaviour
         //}
 
         PauseControll();
-        
+
     }
 
     void PauseControll()
@@ -74,6 +92,7 @@ public class PauseManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q) && isPause == false)
         {
             isPause = true;
+            ShowBlackFilter(true);
             pauseUIInstance = GameObject.Instantiate(pauseUIPrefab);
             instanceRectTransform = pauseUIInstance.GetComponent<RectTransform>();
             instanceRectTransform.Translate(0, 0, 0);
@@ -84,31 +103,28 @@ public class PauseManager : MonoBehaviour
             nowImage = PauseImageType.HowToPlay;
             Time.timeScale = 0f;
         }
-        else if(Input.GetKeyDown(KeyCode.Q) && isPause == true)
+        else if (Input.GetKeyDown(KeyCode.Q) && isPause == true)
         {
             isPause = false;
+            ShowBlackFilter(false);
             Destroy(pauseUIInstance);
             Time.timeScale = 1.0f;
         }
-        else if(isPause == true && Input.GetKeyDown(KeyCode.RightArrow))
+        else if (isPause == true && Input.GetKeyDown(KeyCode.RightArrow))
         {
-            switch(nowImage)
+            switch (nowImage)
             {
                 case PauseImageType.HowToPlay:
                     pauseImage.sprite = howToControll;
                     nowImage = PauseImageType.HowToControll;
                     break;
                 case PauseImageType.HowToControll:
-                    pauseImage.sprite = story;
-                    nowImage = PauseImageType.Story;
-                    break;
-                case PauseImageType.Story:
                     pauseImage.sprite = other;
                     nowImage = PauseImageType.Other;
                     break;
                 case PauseImageType.Other:
-                    pauseImage.sprite = howToPlay;
-                    nowImage = PauseImageType.HowToPlay;
+                    pauseImage.sprite = story;
+                    nowImage = PauseImageType.Story;
                     break;
 
             }
@@ -117,21 +133,17 @@ public class PauseManager : MonoBehaviour
         {
             switch (nowImage)
             {
-                case PauseImageType.HowToPlay:
-                    pauseImage.sprite = other;
-                    nowImage = PauseImageType.Other;
-                    break;
                 case PauseImageType.HowToControll:
                     pauseImage.sprite = howToPlay;
                     nowImage = PauseImageType.HowToPlay;
                     break;
                 case PauseImageType.Story:
-                    pauseImage.sprite = howToControll;
-                    nowImage = PauseImageType.HowToControll;
+                    pauseImage.sprite = other;
+                    nowImage = PauseImageType.Other;
                     break;
                 case PauseImageType.Other:
-                    pauseImage.sprite = story;
-                    nowImage = PauseImageType.Story;
+                    pauseImage.sprite = howToControll;
+                    nowImage = PauseImageType.HowToControll;
                     break;
 
             }
@@ -140,7 +152,14 @@ public class PauseManager : MonoBehaviour
 
     }
 
-    //イージングつきでポーズUIを表示(未実装)
+
+    public void ShowBlackFilter(bool mode)
+    {
+        BlackFilter.SetActive(mode);   
+    }
+
+
+//イージングつきでポーズUIを表示(未実装)
     //public IEnumerator StartPause()
     //{
     //    if(isEasing == false)
