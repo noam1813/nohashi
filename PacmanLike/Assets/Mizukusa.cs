@@ -11,8 +11,8 @@ public class Mizukusa : MonoBehaviour
 
     [SerializeField] private PlayerManager player;
 
-    private bool isUsing;
-    
+    public bool isUsing = false;
+
     /// <summary>
     /// 水草スポーン時、プレイヤーの情報を代入する
     /// </summary>

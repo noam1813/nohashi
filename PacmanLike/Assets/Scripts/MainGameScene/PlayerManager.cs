@@ -338,7 +338,7 @@ public class PlayerManager : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (other.gameObject.tag == "Enemy" && TimeManager.instance.timeZone == TimeZoneData.Night && !isSceneEnded)
+        if (other.gameObject.tag == "Enemy" && TimeManager.instance.timeZone == TimeZoneData.Night && !isSceneEnded && useMizukusa == null)
         {
             GameOver();
 
