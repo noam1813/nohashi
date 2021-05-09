@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using DG.Tweening;
 
 public class ResultManager : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class ResultManager : MonoBehaviour
 
     [SerializeField] private GameObject enterImage;
     [SerializeField] private GameObject titleText;
+
+    //リザルト画面のBGM
+    [SerializeField] private AudioSource resultBGM;
 
     //ランクごとのテキストオブジェクト
     [SerializeField] private GameObject rankS;
@@ -70,6 +74,8 @@ public class ResultManager : MonoBehaviour
 
         enterImage.GetComponent<Image>().color = new Color(255, 255, 255, 0);
         titleText.GetComponent<Text>().color = new Color(255, 255, 255, 0);
+        
+        FadeResultBGM();
     }
 
     private void Update()
@@ -147,5 +153,20 @@ public class ResultManager : MonoBehaviour
             return rankC.GetComponent<Text>();
         }
 
+    }
+    
+    
+    private void FadeResultBGM()
+    {
+        Sequence sequence = DOTween.Sequence()
+            .Append(
+                DOTween.To(
+                    () => resultBGM.volume,
+                    num => resultBGM.volume = num,
+                    0.5f,
+                    1f
+                )
+            )
+            .Play();
     }
 }

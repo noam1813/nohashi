@@ -9410,6 +9410,11 @@ PrefabInstance:
       propertyPath: spawnPoints.Array.data[3].y
       value: -31
       objectReference: {fileID: 0}
+    - target: {fileID: 1896213678147416506, guid: a67fb0a00bb2b664a9e5ed994e731b96,
+        type: 3}
+      propertyPath: nowKai
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1896213678147416507, guid: a67fb0a00bb2b664a9e5ed994e731b96,
         type: 3}
       propertyPath: m_Name

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class MainGameMusicManager : MonoBehaviour
 {
@@ -202,5 +203,35 @@ public class MainGameMusicManager : MonoBehaviour
         }
 
         yield return null;
+    }
+
+
+    public void BGMStop()
+    {
+        Sequence seq = DOTween.Sequence()
+            .Append(
+                DOTween.To(
+                    () => noonBGM.volume,
+                    num => noonBGM.volume = num,
+                    0f,
+                    1f
+                )
+            )
+            .Join(
+                DOTween.To(
+                    () => nightBGM.volume,
+                    num => nightBGM.volume = num,
+                    0f,
+                    1f
+                )
+            )
+            .Join(
+                DOTween.To(
+                    () => battleBGM.volume,
+                    num => battleBGM.volume = num,
+                    0f,
+                    1f
+                )
+            );
     }
 }

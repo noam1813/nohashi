@@ -397,13 +397,26 @@ public class PlayerManager : MonoBehaviour
 
             if (nowKai >= KaiManager.instance.MaxKai)
             {
-                ResultDataManager.instance.SetResultData();
-
-                SceneFadeManager.Instance.StartFade(SceneFadeManager.FADE_TYPE.FADE_OUTIN, 0.4f,
-                    () => { SceneManager.LoadScene("ResultScene"); });
+                StartCoroutine(StartGameClearProcess());
                 //Debug.Log("貝全部ゲット");
             }
         }
+    }
+
+    public IEnumerator StartGameClearProcess()
+    {
+        MainGameMusicManager.instance.BGMStop();
+        ResultDataManager.instance.SetResultData();
+        
+        yield return new WaitForSeconds(1.5f);
+        
+        SceneFadeManager.Instance.StartFade(SceneFadeManager.FADE_TYPE.FADE_OUTIN, 0.4f,
+            () =>
+            {
+                SceneManager.LoadScene("ResultScene");
+            });
+        
+        
     }
 
 

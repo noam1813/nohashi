@@ -617,6 +617,7 @@ MonoBehaviour:
   totalScoreText: {fileID: 276582757}
   enterImage: {fileID: 1170067485}
   titleText: {fileID: 49483031}
+  resultBGM: {fileID: 1541772449}
   rankS: {fileID: 762271637}
   rankA: {fileID: 1385599344}
   rankB: {fileID: 1587085622}
@@ -1652,7 +1653,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3f3a290a8b2f3604d837239e68ae6e6a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
