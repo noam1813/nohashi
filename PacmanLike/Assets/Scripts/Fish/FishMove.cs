@@ -123,12 +123,7 @@ public class FishMove : MonoBehaviour
         sensibleDistanceInNight = Mathf.Pow(sensibleDistanceInNight, 2);
 
     }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-            ChangeTime();
-    }
+    
 
     void FixedUpdate()
     {

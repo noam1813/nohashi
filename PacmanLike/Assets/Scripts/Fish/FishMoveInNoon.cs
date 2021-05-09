@@ -98,12 +98,6 @@ public class FishMoveInNoon : MonoBehaviour
         
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-            ChangeTime();
-    }
-
     void FixedUpdate()
     {
         if(isNoon)
