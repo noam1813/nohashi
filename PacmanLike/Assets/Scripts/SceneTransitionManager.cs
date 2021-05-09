@@ -22,6 +22,8 @@ public class SceneTransitionManager : MonoBehaviour
     void Start()
     {
         Instance = GetComponent<SceneTransitionManager>();
+
+        Debug.Log("Set Instance");
     }
 
     void Update()
@@ -31,8 +33,11 @@ public class SceneTransitionManager : MonoBehaviour
 
     public IEnumerator SceneTransitionToPlay(string sceneTitle, float waitaTime)
     {
+        Debug.Log("Pushed R Key 2");
         yield return new WaitForSeconds(waitaTime);
+        Debug.Log("Pushed R Key 3");
         SceneManager.LoadScene(sceneTitle);
+        Debug.Log("Pushed R Key 4");
 
     }
     public void OnButtonClick()

@@ -6,13 +6,14 @@ using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using DG.Tweening;
 using UnityEngine.SocialPlatforms;
 using Random = System.Random;
 
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
-    
+
     public Grid grid;
     public Tilemap stageTilemap;
     public int nowKai;
@@ -24,13 +25,13 @@ public class PlayerManager : MonoBehaviour
     private SpriteRenderer sr;
     private Vector3[] AroundVector = new Vector3[4];
     private Animator animator;
-    
-    
-    
+
+
+
     // 水草関係
     public bool isHide;
     private Mizukusa useMizukusa;
-    
+
 
     private bool isSceneEnded;
 
@@ -38,11 +39,15 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private Vector3 nextPosition;
 
-    
+
     [System.Serializable]
     enum Direction
     {
-        Null, Right, Up, Left, Down
+        Null,
+        Right,
+        Up,
+        Left,
+        Down
     }
 
 
@@ -57,7 +62,7 @@ public class PlayerManager : MonoBehaviour
             DestroyImmediate(gameObject);
         }
     }
-    
+
     private void Start()
     {
         isSceneEnded = false;
@@ -72,7 +77,7 @@ public class PlayerManager : MonoBehaviour
         AroundVector[3] = new Vector3(0, -1, 0); // 下
 
         animator = gameObject.GetComponent<Animator>();
-        
+
         DecideNextPosition();
     }
 
@@ -85,16 +90,19 @@ public class PlayerManager : MonoBehaviour
         {
             ManageHideMode();
         }
+
+        CheckSceneMoveShortCut();
     }
-    
-    
+
+
     private void FixedUpdate()
     {
         //秘匿時はプレイヤーは動けない
         if (!isHide)
         {
-            PlayerMove();   
+            PlayerMove();
         }
+
         SetAnimation();
     }
 
@@ -112,18 +120,20 @@ public class PlayerManager : MonoBehaviour
                     transform.position = pos;
                     DecideNextPosition();
                 }
+
                 break;
-            
+
             case Direction.Up:
                 pos.y += speed * Time.deltaTime;
-                if (pos.y>= nextPosition.y)
+                if (pos.y >= nextPosition.y)
                 {
                     pos.y = nextPosition.y;
                     transform.position = pos;
                     DecideNextPosition();
                 }
+
                 break;
-            
+
             case Direction.Left:
                 pos.x -= speed * Time.deltaTime;
                 if (pos.x <= nextPosition.x)
@@ -132,8 +142,9 @@ public class PlayerManager : MonoBehaviour
                     transform.position = pos;
                     DecideNextPosition();
                 }
+
                 break;
-            
+
             case Direction.Down:
                 pos.y -= speed * Time.deltaTime;
                 if (pos.y <= nextPosition.y)
@@ -142,23 +153,25 @@ public class PlayerManager : MonoBehaviour
                     transform.position = pos;
                     DecideNextPosition();
                 }
+
                 break;
-            
+
             case Direction.Null:
                 DecideNextPosition();
                 break;
-            
+
             default:
-                Debug.Log("Now Direction Error! : "+nowDirection);
+                Debug.Log("Now Direction Error! : " + nowDirection);
                 break;
-            
+
         }
+
         this.transform.position = pos;
     }
 
     private void ManageHideMode()
     {
-        if(!Input.GetKey(KeyCode.LeftShift) && !Input.GetKeyDown(KeyCode.LeftShift))
+        if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKeyDown(KeyCode.LeftShift))
         {
             useMizukusa.endUse();
             Debug.Log("終わり");
@@ -166,22 +179,31 @@ public class PlayerManager : MonoBehaviour
     }
 
 
+    private void RetryCommand()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+
+        }
+    }
+
+
     private void GetReserveDirection()
     {
-        
-        if (Input.GetAxis("Horizontal")>0)
+
+        if (Input.GetAxis("Horizontal") > 0)
         {
             ReserveDirection = Direction.Right;
         }
-        else if (Input.GetAxis("Vertical")>0)
+        else if (Input.GetAxis("Vertical") > 0)
         {
             ReserveDirection = Direction.Up;
         }
-        else if (Input.GetAxis("Horizontal")<0)
+        else if (Input.GetAxis("Horizontal") < 0)
         {
             ReserveDirection = Direction.Left;
         }
-        else if (Input.GetAxis("Vertical")<0)
+        else if (Input.GetAxis("Vertical") < 0)
         {
             ReserveDirection = Direction.Down;
         }
@@ -194,7 +216,7 @@ public class PlayerManager : MonoBehaviour
         {
             DecideNextPosition();
         }
-        
+
     }
 
 
@@ -241,25 +263,25 @@ public class PlayerManager : MonoBehaviour
     private void DecideNextPositionFromReserve()
     {
         bool[] blockflag = CheckAroundBlockForMovingDirection();
-        
+
         if (!blockflag[0] && ReserveDirection == Direction.Right)
         {
             SetDirection(Direction.Right);
             ReserveDirection = Direction.Null;
         }
-                
+
         else if (!blockflag[1] && ReserveDirection == Direction.Up)
         {
             SetDirection(Direction.Up);
             ReserveDirection = Direction.Null;
         }
-                
+
         else if (!blockflag[2] && ReserveDirection == Direction.Left)
         {
             SetDirection(Direction.Left);
             ReserveDirection = Direction.Null;
         }
-                
+
         else if (!blockflag[3] && ReserveDirection == Direction.Down)
         {
             SetDirection(Direction.Down);
@@ -271,7 +293,7 @@ public class PlayerManager : MonoBehaviour
             DecideNextPositionFromNow();
         }
     }
-    
+
 
 
     private void SetDirection(Direction direc)
@@ -299,8 +321,8 @@ public class PlayerManager : MonoBehaviour
 
         nextPosition = pos;
     }
-    
-    
+
+
     bool[] CheckAroundBlockForMovingDirection()
     {
         Vector3 nowPosition = grid.WorldToCell(this.transform.position);
@@ -308,7 +330,7 @@ public class PlayerManager : MonoBehaviour
         //右上左下の順
         bool[] AroundBlock = new bool[4];
 
-        foreach(var v in AroundVector.Select((value, index) => new { value, index }))
+        foreach (var v in AroundVector.Select((value, index) => new {value, index}))
         {
             if (stageTilemap.GetTile(grid.WorldToCell(this.transform.position + v.value)) != null)
             {
@@ -319,11 +341,11 @@ public class PlayerManager : MonoBehaviour
                 AroundBlock[v.index] = true;
             }
         }
-        
+
         return AroundBlock;
     }
-    
-    
+
+
     //周囲のブロックをお知らせ(デバッグ用)
     void AroundInfo()
     {
@@ -338,7 +360,8 @@ public class PlayerManager : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (other.gameObject.tag == "Enemy" && TimeManager.instance.timeZone == TimeZoneData.Night && !isSceneEnded && useMizukusa == null)
+        if (other.gameObject.tag == "Enemy" && TimeManager.instance.timeZone == TimeZoneData.Night && !isSceneEnded &&
+            useMizukusa == null)
         {
             GameOver();
 
@@ -376,16 +399,14 @@ public class PlayerManager : MonoBehaviour
             {
                 ResultDataManager.instance.SetResultData();
 
-                SceneFadeManager.Instance.StartFade(SceneFadeManager.FADE_TYPE.FADE_OUTIN, 0.4f, () =>
-                {
-                    SceneManager.LoadScene("ResultScene");
-                });
+                SceneFadeManager.Instance.StartFade(SceneFadeManager.FADE_TYPE.FADE_OUTIN, 0.4f,
+                    () => { SceneManager.LoadScene("ResultScene"); });
                 //Debug.Log("貝全部ゲット");
             }
         }
     }
 
-    
+
     private void OnTriggerStay2D(Collider2D other)
     {
         switch (other.gameObject.tag)
@@ -400,7 +421,7 @@ public class PlayerManager : MonoBehaviour
 
                 break;
         }
-        
+
     }
 
 
@@ -456,30 +477,30 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-            animator.Play(animName);
+        animator.Play(animName);
     }
 
-    
+
     /// <summary>
     /// 水草を用いたプレイヤーの秘匿設定
     /// 有効、無効、使用している水草の設定
     /// </summary>
     /// <param name="mode"></param>
     /// <param name="mizukusa"></param>
-    public void SetHide(bool mode,Mizukusa mizukusa = null)
+    public void SetHide(bool mode, Mizukusa mizukusa = null)
     {
         isHide = mode;
         if (mode)
         {
-            GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,0.5f);
+            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
             useMizukusa = mizukusa;
         }
         else
         {
-            GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
+            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
             useMizukusa = null;
         }
-        
+
         StageEffectManager.instance.SetMizukusa(mode);
         StageEffectManager.instance.SetShadow(mode);
     }
@@ -495,10 +516,27 @@ public class PlayerManager : MonoBehaviour
     {
         isSceneEnded = true;
 
-        SceneFadeManager.Instance.StartFade(SceneFadeManager.FADE_TYPE.FADE_OUTIN, 0.4f, () =>
-        {
-            SceneManager.LoadScene("GameOverScene");
-        });
+        SceneFadeManager.Instance.StartFade(SceneFadeManager.FADE_TYPE.FADE_OUTIN, 0.4f,
+            () => { SceneManager.LoadScene("GameOverScene"); });
     }
+
+
+    private void CheckSceneMoveShortCut()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Debug.Log("Pushed R Key");
+            SceneFadeManager.Instance.StartFade(SceneFadeManager.FADE_TYPE.FADE_OUTIN, 0.4f,
+                () => { SceneManager.LoadScene("EnemySampleScene"); });
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Debug.Log("Pushed R Key");
+            SceneFadeManager.Instance.StartFade(SceneFadeManager.FADE_TYPE.FADE_OUTIN, 0.4f,
+                () => { SceneManager.LoadScene("TitleScene"); });
+        }
+    }
+
 }
 
