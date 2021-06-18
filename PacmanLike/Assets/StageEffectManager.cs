@@ -35,9 +35,9 @@ public class StageEffectManager : MonoBehaviour
     /// 夜の陰の表示非表示を切り替える。アニメーション付き
     /// </summary>
     /// <param name="mode"></param>
-    public void SetShadow(bool mode)
+    public void UpdateShadow()
     {
-        if (mode)
+        if (GetShadowStatus())
         {
             // SequenceはDoTween関係の変数。融通の利くアニメーションと思ってもいいかも。
             //陰を表示する時のシークエンス
@@ -100,5 +100,17 @@ public class StageEffectManager : MonoBehaviour
             }
         }
         
+    }
+
+
+    public bool GetShadowStatus()
+    {
+        if (PlayerManager.instance.isHide
+            || TimeManager.instance.timeZone == TimeZoneData.Night)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

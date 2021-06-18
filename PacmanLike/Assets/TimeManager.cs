@@ -105,7 +105,7 @@ public class TimeManager : MonoBehaviour
             case TimeZoneData.Noon:
                 timeZone = TimeZoneData.Night;
                 TimeZoneIcon.sprite = Resources.Load<Sprite>("TimeZoneIcon/Night");
-                StageEffectManager.instance.SetShadow(true);
+                StageEffectManager.instance.UpdateShadow();
                 musicManager.StartCoroutine("ToNight");
                 break;
             
@@ -121,7 +121,7 @@ public class TimeManager : MonoBehaviour
                 timeZone = TimeZoneData.Noon;
                 TimeZoneIcon.sprite = Resources.Load<Sprite>("TimeZoneIcon/Noon");
                 nowDayText.text = "DAY" + nowDay;
-                StageEffectManager.instance.SetShadow(false);
+                StageEffectManager.instance.UpdateShadow();
                 musicManager.StartCoroutine("ToNoon");
                 musicManager.battleBGM.Stop();
                 FishManager.instance.Spawn();

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
 using System.Linq;
+
 using System.Runtime.CompilerServices;
 using DG.Tweening;
 using UnityEngine.SocialPlatforms;
@@ -36,8 +37,14 @@ public class PlayerManager : MonoBehaviour
     private bool isSceneEnded;
 
     //SerializeField : 変数の扱いをprivate扱いにしながらインスペクタに入力欄を表示することができる
-    [SerializeField] private float speed = 1.0f;
+    [SerializeField] private float normalSpeed = 1.0f;
+    [SerializeField] private float turboSpeedRate = 2f;
     [SerializeField] private Vector3 nextPosition;
+
+    [SerializeField] private float maxTurboTime;
+    [SerializeField] private float turboTime;
+
+    private bool isTurbo = false;
 
 
     [System.Serializable]
@@ -97,10 +104,16 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
         //秘匿時はプレイヤーは動けない
         if (!isHide)
         {
             PlayerMove();
+        }
+
+        if (turboTime != 0f)
+        {
+            UpdateTurbo();
         }
 
         SetAnimation();
@@ -113,7 +126,7 @@ public class PlayerManager : MonoBehaviour
         switch (nowDirection)
         {
             case Direction.Right:
-                pos.x += speed * Time.deltaTime;
+                pos.x += GetSpeed();
                 if (pos.x >= nextPosition.x)
                 {
                     pos.x = nextPosition.x;
@@ -124,7 +137,7 @@ public class PlayerManager : MonoBehaviour
                 break;
 
             case Direction.Up:
-                pos.y += speed * Time.deltaTime;
+                pos.y += GetSpeed();
                 if (pos.y >= nextPosition.y)
                 {
                     pos.y = nextPosition.y;
@@ -135,7 +148,7 @@ public class PlayerManager : MonoBehaviour
                 break;
 
             case Direction.Left:
-                pos.x -= speed * Time.deltaTime;
+                pos.x -= GetSpeed();
                 if (pos.x <= nextPosition.x)
                 {
                     pos.x = nextPosition.x;
@@ -146,7 +159,7 @@ public class PlayerManager : MonoBehaviour
                 break;
 
             case Direction.Down:
-                pos.y -= speed * Time.deltaTime;
+                pos.y -= GetSpeed();
                 if (pos.y <= nextPosition.y)
                 {
                     pos.y = nextPosition.y;
@@ -407,9 +420,9 @@ public class PlayerManager : MonoBehaviour
     {
         MainGameMusicManager.instance.BGMStop();
         ResultDataManager.instance.SetResultData();
-        
+
         yield return new WaitForSeconds(1.5f);
-        
+
         SceneFadeManager.Instance.StartFade(SceneFadeManager.FADE_TYPE.FADE_OUTIN, 0.4f,
             () =>
             {
@@ -515,7 +528,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         StageEffectManager.instance.SetMizukusa(mode);
-        StageEffectManager.instance.SetShadow(mode);
+        StageEffectManager.instance.UpdateShadow();
     }
 
 
@@ -548,6 +561,51 @@ public class PlayerManager : MonoBehaviour
             Debug.Log("Pushed R Key");
             SceneFadeManager.Instance.StartFade(SceneFadeManager.FADE_TYPE.FADE_OUTIN, 0.4f,
                 () => { SceneManager.LoadScene("TitleScene"); });
+        }
+    }
+
+
+    /// <summary>
+    /// 現在の速度を取得する
+    /// </summary>
+    /// <returns></returns>
+    private float GetSpeed()
+    {
+        Debug.Log(normalSpeed);
+        Debug.Log(turboSpeedRate);
+        
+        if (turboTime != 0f)
+        {
+            return normalSpeed * Time.deltaTime * turboSpeedRate;
+            Debug.Log(normalSpeed);
+        }
+
+        return normalSpeed * Time.deltaTime;
+    }
+
+
+    /// <summary>
+    /// のはしのターボを有効化、タイマーのセット
+    /// </summary>
+    public void SetTurbo()
+    {
+        turboTime = maxTurboTime;
+    }
+
+
+    /// <summary>
+    /// ターボのカウンタを更新する
+    /// </summary>
+    private void UpdateTurbo()
+    {
+        if (turboTime != 0f)
+        {
+            turboTime -= Time.deltaTime;
+        }
+
+        if (turboTime < 0f)
+        {
+            turboTime = 0f;
         }
     }
 

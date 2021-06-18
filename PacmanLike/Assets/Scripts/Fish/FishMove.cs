@@ -719,6 +719,7 @@ public class FishMove : MonoBehaviour
                 FishManager.instance.RemoveFish(this);
                 Destroy(this.gameObject);
                 AudioManager.instance.Play("EatFish");
+                PlayerManager.instance.SetTurbo();
             }
         }
     }
