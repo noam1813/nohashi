@@ -590,6 +590,7 @@ public class PlayerManager : MonoBehaviour
     public void SetTurbo()
     {
         turboTime = maxTurboTime;
+        StageEffectManager.instance.SetConcentratedLine(true);
     }
 
 
@@ -605,6 +606,7 @@ public class PlayerManager : MonoBehaviour
 
         if (turboTime < 0f)
         {
+            StageEffectManager.instance.SetConcentratedLine(false);
             turboTime = 0f;
         }
     }

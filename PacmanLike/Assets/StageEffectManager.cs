@@ -9,6 +9,7 @@ public class StageEffectManager : MonoBehaviour
     public static StageEffectManager instance;
     
     [SerializeField] private Image NightShadow;
+    [SerializeField] private RawImage ConcentratedLine;
 
     [SerializeField] private RectTransform MizukusaGroup;
 
@@ -112,5 +113,18 @@ public class StageEffectManager : MonoBehaviour
         }
 
         return false;
+    }
+
+
+    public void SetConcentratedLine(bool mode)
+    {
+        if (mode)
+        {
+            ConcentratedLine.gameObject.SetActive(true);
+        }
+        else
+        {
+            ConcentratedLine.gameObject.SetActive(false);
+        }
     }
 }
