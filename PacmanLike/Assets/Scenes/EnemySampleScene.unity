@@ -17057,6 +17057,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4996431185684911825, guid: a1e6e73f76533a64688247fd366bcfe0,
+        type: 3}
+      propertyPath: howToPlay
+      value: 
+      objectReference: {fileID: 21300000, guid: 8dbbe2f272cf38548bb704bb8ed09d54,
+        type: 3}
+    - target: {fileID: 4996431185684911825, guid: a1e6e73f76533a64688247fd366bcfe0,
+        type: 3}
+      propertyPath: howToControll
+      value: 
+      objectReference: {fileID: 21300000, guid: daa9157ca93fad94ea583caeb32e4a2d,
+        type: 3}
+    - target: {fileID: 4996431185684911825, guid: a1e6e73f76533a64688247fd366bcfe0,
+        type: 3}
+      propertyPath: story
+      value: 
+      objectReference: {fileID: 21300000, guid: 0f600e6efa584634cb03f22bc20e034e,
+        type: 3}
     - target: {fileID: 4996431185684911826, guid: a1e6e73f76533a64688247fd366bcfe0,
         type: 3}
       propertyPath: m_LocalPosition.x
