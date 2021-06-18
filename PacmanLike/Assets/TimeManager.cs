@@ -123,6 +123,7 @@ public class TimeManager : MonoBehaviour
                 nowDayText.text = "DAY" + nowDay;
                 StageEffectManager.instance.SetShadow(false);
                 musicManager.StartCoroutine("ToNoon");
+                musicManager.battleBGM.Stop();
                 FishManager.instance.Spawn();
                 
                 break;
